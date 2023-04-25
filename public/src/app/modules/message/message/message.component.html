@@ -1,0 +1,42 @@
+<div class="main-content" *ngIf="dataTable">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="content">
+                        <div class="fresh-datatables ScrollTable">
+                            <table id="datatablesMessage" class="table table-striped table-no-bordered table-hover table-responsive"
+                                cellspacing="0" width="100%" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">{{ dataTable.headerRow[0] }}</th>
+                                        <th class="text-center">{{ dataTable.headerRow[1] }}</th>
+                                        <th class="text-center">{{ dataTable.headerRow[2] }}</th>
+                                        <th class="text-center">{{ dataTable.headerRow[3] }}</th>
+                                        <th class="text-center">{{ dataTable.headerRow[4] }}</th>
+                                        <th class="text-center">{{ dataTable.headerRow[5] }}</th>
+                                        <th class="text-center">{{ dataTable.headerRow[6] }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tBodyCountry">
+                                    <tr *ngFor="let message of arrayMessages; let i = index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{message.message_date}}</td>
+                                        <td>{{message.message_time}}</td>
+                                        <td>{{message.message_email}}</td>
+                                        <td class="text-center"> {{message.message_name}}</td>
+                                        <td class="text-center"> {{message.message_description}} </td>
+                                        <td>
+                                        {{message.message_phone}}
+                                        </td>
+                                      
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

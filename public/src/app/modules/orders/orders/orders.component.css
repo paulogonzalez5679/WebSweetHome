@@ -1,0 +1,201 @@
+*,
+*:before,
+*:after {
+     box-sizing: border-box;
+}
+
+.span-order {
+  color: red;
+  font-weight: bold;
+}
+.span-date {
+  color: #868383;
+  font-weight: bold;
+}
+.span-price {
+  color: green;
+  font-weight: bold;
+}
+.p-4 {
+  padding: 1.5rem !important;
+}
+.bb {
+  border: solid 1px #000;
+}
+td.text-right {
+  padding-right: 5px !important;
+}
+/* .step-one {
+  min-width: 20px;
+  min-height: 20px;
+  background-color: red;
+  -webkit-box-shadow: -1px 1px 16px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 1px 16px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: -1px 1px 16px -5px rgba(0, 0, 0, 0.75);
+} */
+/* .step-two {
+  margin-right: 5px;
+  margin-left: 5px;
+  background: linear-gradient(to bottom, #393939 0%, #151515 100%);
+
+  min-width: 20px;
+  min-height: 20px;
+  -webkit-box-shadow: -1px 1px 16px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 1px 16px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: -1px 1px 16px -5px rgba(0, 0, 0, 0.75);
+} */
+/* .step-three {
+  min-width: 20px;
+  min-height: 20px;
+  background-color: green;
+  -webkit-box-shadow: -1px 1px 16px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 1px 16px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: -1px 1px 16px -5px rgba(0, 0, 0, 0.75);
+} */
+
+.step-init {
+  width: 20px;
+  height: 20px;
+  border-radius: 60px;
+  background: linear-gradient(to bottom, #c1c1c1 0%, #f2eaea 100%);
+  position: relative;
+}
+.step-int:before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border-radius: 53px;
+  background: rgb(224, 201, 201);
+  border: 1px solid #ff0000;
+  position: absolute;
+  left: 1px;
+  top: 1px;
+}
+.step-init:after {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  position: absolute;
+  transform: rotate(-18deg);
+  left: 5px;
+  top: 3px;
+}
+
+
+.step-one {
+  width: 20px;
+  height: 20px;
+  border-radius: 60px;
+  background: linear-gradient(to bottom, #c1c1c1 0%, #f2eaea 100%);
+  position: relative;
+}
+.step-one:before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border-radius: 53px;
+  background: #fa6370;
+  border: 1px solid #fa6370;
+  position: absolute;
+  left: 1px;
+  top: 1px;
+}
+.step-one:after {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  position: absolute;
+  transform: rotate(-18deg);
+  left: 5px;
+  top: 3px;
+}
+
+.step-two {
+  width: 20px;
+  height: 20px;
+  border-radius: 60px;
+  background: linear-gradient(to bottom, #c1c1c1 0%, #f2eaea 100%);
+  position: relative;
+}
+.step-two:before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border-radius: 53px;
+  background: #ffd901;
+  border: 1px solid #f7bf06;
+  position: absolute;
+  left: 1px;
+  top: 1px;
+}
+.step-two:after {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  position: absolute;
+  transform: rotate(-18deg);
+  left: 5px;
+  top: 3px;
+}
+
+.step-three {
+     width: 20px;
+     height: 20px;
+     border-radius: 60px;
+     background: linear-gradient(to bottom, #c1c1c1 0%, #f2eaea 100%);
+     position: relative;
+}
+.step-three:before {
+     content: '';
+     width: 20px;
+     height: 20px;
+     border-radius: 53px;
+     background: #19f000;
+     border: 1px solid #c1c1c1;
+     position: absolute;
+     left: 1px;
+     top: 1px;
+}
+.step-three:after {
+     content: '';
+     width: 9px;
+     height: 9px;
+     border-radius: 50%;
+     background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+     position: absolute;
+     transform: rotate(-18deg);
+     left: 5px;
+     top: 3px;
+}
+
+
+.row-w-100 {
+  min-width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.no-p {
+  padding: 0px !important;
+}
+
+.alert-danger {
+
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.alert-warning {
+
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.alert-success {
+  text-transform: uppercase;
+  font-weight: bold;
+}

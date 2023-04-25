@@ -1,0 +1,299 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <div class="row">
+              <div class="col-md-12 text-right">
+                <button type="button" class="btn btn-info btn-fill" (click)="newProduct()" data-toggle="modal"
+                  data-target="#modalProduct">
+                  <i class="fa fa-plus"></i> Nuevo Producto
+                </button>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div class="content">
+            <div class="fresh-datatables">
+              <table id="datatablesProducts" class="table table-striped table-no-bordered table-hover" cellspacing="0"
+                width="100%" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>{{ dataTable.headerRow[0] }}</th>
+                    <th>{{ dataTable.headerRow[1] }}</th>
+                    <th>{{ dataTable.headerRow[2] }}</th>
+                    <th>{{ dataTable.headerRow[3] }}</th>
+                    <th>{{ dataTable.headerRow[4] }}</th>
+                    <th>{{ dataTable.headerRow[5] }}</th>
+                    <th>{{ dataTable.headerRow[6] }}</th>
+                    <th>{{ dataTable.headerRow[7] }}</th>
+                    <th>{{ dataTable.headerRow[8] }}</th>
+                    <th class="disabled-sorting text-right">{{ dataTable.headerRow[9] }}</th>
+                    <th class="disabled-sorting text-right">{{ dataTable.headerRow[10]}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let product of arrayproduct; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{product.pro_id | slice:8}}</td>
+                    <td>{{product.pro_id_internal}}</td>
+                    <td>{{product.pro_nombre}}</td>
+                    <td>{{product.pro_categoria}}</td>
+                    <td>{{product.pro_description}}</td>
+                    <td>{{product.pro_stock}}</td>
+                    <td>{{product.pro_precio}}</td>
+                    <td><img class="img-category" src="{{product.pro_url}}" alt=""></td>
+
+                    <td>
+                      <button type="submit" class="btn btn-fill btn-primary" (click)="selectProduct(product)"
+                        data-toggle="modal" data-target="#modalProduct">
+                        <i class="fa fa-edit"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button type="submit" class="btn btn-fill btn-danger" (click)="deleteProduct(product.pro_id)"
+                        [disabled]="product.pro_estado_nuevo==true || product.pro_estado_novedad==true">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal category -->
+<div class="modal fade" id="modalProduct" tabindex="-1" role="dialog" aria-labelledby="modalProductLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modalProductLabel">{{isEdit?'Editar producto':'Nuevo producto'}}</h4>
+      </div>
+      <div class="modal-body">
+        <form #formProduct="ngForm" action="" class="form-horizontal"
+          (ngSubmit)='addProduct (formProduct.value, formProduct.valid)' novalidate action="/" method="get">
+          <div class="row">
+
+            <div class="col-sm-3">
+              <input type="text" readonly class="form-control" name="pro_id" id="pro_id" placeholder="ID"
+                [(ngModel)]="product.pro_id" #pro_id="ngModel" required pattern="">
+              <small [hidden]="pro_id.valid || (pro_id.pristine && !formProduct.submitted)" class="text-danger">
+                Obligatorio</small>
+            </div>
+
+            <div class="col-sm-3">
+              <input type="text" class="form-control" name="pro_id_internal" id="pro_id_internal"
+                placeholder="Código interno " [(ngModel)]="product.pro_id_internal" #pro_id_internal="ngModel" required
+                pattern="">
+              <small [hidden]="pro_id_internal.valid || (pro_id_internal.pristine && !formProduct.submitted)" class="text-danger">
+                Obligatorio</small>
+            </div>
+
+            <div class="col-sm-3">
+              <input type="text" class="form-control" name="pro_description" id="pro_description"
+                placeholder="Descripción del producto" [(ngModel)]="product.pro_description" #pro_description="ngModel"
+                required pattern="">
+              <small [hidden]="pro_description.valid || (pro_description.pristine && !formProduct.submitted)"
+                class="text-danger"> Obligatorio</small>
+            </div>
+
+            <div class="col-sm-3">
+              <input type="text" class="form-control" name="pro_stock" id="pro_stock" placeholder="Stock del producto"
+                [(ngModel)]="product.pro_stock" #pro_stock="ngModel" required pattern="">
+              <small [hidden]="pro_stock.valid || (pro_stock.pristine && !formProduct.submitted)" class="text-danger">
+                Obligatorio</small>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-sm-3" style="margin-top: 5%;">
+              <input type="text" class="form-control" name="pro_nombre" id="pro_nombre"
+                placeholder="Nombre del producto" [(ngModel)]="product.pro_nombre" #pro_nombre="ngModel" required
+                pattern="">
+              <small [hidden]="pro_nombre.valid || (pro_nombre.pristine && !formProduct.submitted)" class="text-danger">
+                Obligatorio</small>
+            </div>
+            <div class="col-sm-3" style="margin-top: 5%;">
+              <input type="text" class="form-control" name="pro_precio" id="pro_precio"
+                placeholder="Precio del producto" [(ngModel)]="product.pro_precio" #pro_precio="ngModel" required
+                pattern="">
+              <small [hidden]="pro_precio.valid || (pro_precio.pristine && !formProduct.submitted)" class="text-danger">
+                Obligatorio</small>
+            </div>
+            <div class="col-sm-3" style="margin-top: 3%;">
+              <span>*Seleccionar categoria</span>
+              <select class="form-control" (ngModelChange)='sCategory($event)' name="pro_categoria" id="pro_categoria"
+                [(ngModel)]='product.pro_categoria'>
+                <option *ngFor="let category of arrayCategory; let i = index" value="{{category.nombre}}">
+                  {{category.nombre}}</option>
+              </select>
+              <br>
+              <!-- <select class="form-control" (ngModelChange)="selectCategories($event)"
+                  name="pro_categoria" id="pro_categoria" [(ngModel)]="product.pro_categoria" #pro_categoria="ngModel">
+                  <option selected value="">Seleccione la categoría</option>
+                  <option *ngFor="let category of arrayCategory; let i = index" [value]="i">
+                    {{category.nombre}}
+                  </option>
+                </select>-->
+
+              <!--<small [hidden]="pro_categoria.valid || (pro_categoria.pristine && !formProduct.submitted)"
+                  class="text-danger">
+                  Obligatorio
+                </small> -->
+            </div>
+            <div class="col-sm-3" style="margin-top: 3%;">
+              <span>*Seleccionar SubCategoria</span>
+              <select class="form-control" (ngModelChange)="selectSubCategories($event)"
+                name="pro_subcategory" id="pro_subcategory" [(ngModel)]="product.pro_subcategory">
+                <!-- <option selected value="">SubCategorias</option> -->
+                <option *ngFor="let Subcategory of arraySubcategory; let i = index" value="{{Subcategory.subcat_nombre}}">
+                  {{Subcategory.subcat_nombre}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6 text-center" style="font-size: 12px; margin-top: 1%;">
+              <p>¿Mostrar en la sección "Nuevos"?</p>
+              <bSwitch [switch-disabled]='cont==3&&product.pro_estado_nuevo==false' [switch-on-color]="'primary'"
+                class="" style="max-height: 10px !important; max-width: 20px;"
+                [ngClass]="['switch','switch-sidebar-image']" (changeState)="estadoNuevo($event)"
+                name="pro_estado_nuevo" id="pro_estado_nuevo" [(ngModel)]='product.pro_estado_nuevo'
+                #pro_estado_nuevo="ngModel" pattern="">
+              </bSwitch> 
+              <label class="alert alert-info" *ngIf="cont===3" for="">Tiene los tres productos nuevos</label>
+              <label class="alert alert-danger" *ngIf="cont<3" for="">Debe tener 3 productos nuevos</label>
+            </div>
+            <div class="col-sm-6 text-center" style="font-size: 12px; margin-top: 1%;">
+              <p>¿Mostrar en la sección "Más Vendidos?"</p>
+              <bSwitch [switch-disabled]='cont2==3&&product.pro_estado_novedad==false' [switch-on-color]="'primary'"
+                class="" style="max-height: 10px !important; max-width: 20px;"
+                [ngClass]="['switch','switch-sidebar-image']" (changeState)="estadoLoMasVendido($event)"
+                name="pro_estado_novedad" id="pro_estado_novedad" [(ngModel)]="product.pro_estado_novedad"
+                #pro_estado_novedad="ngModel" >
+              </bSwitch>
+          
+              <label class="alert alert-info" *ngIf="cont2==3" for="">Tiene los tres productos en esta seccion</label>
+              <label class="alert alert-danger" *ngIf="cont2<3" for="">Debe tener 3 productos en esta seccion</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3" style="font-size: 12px; margin-top: 1%;">
+              <p>¿Marcar como "Nuevo"?</p>
+              <bSwitch [switch-on-color]="'primary'" 
+                class="" style="max-height: 10px !important; max-width: 20px;"
+                [ngClass]="['switch','switch-sidebar-image']" (changeState)="estadoNuevoTotal($event)"
+                name="pro_estado_pro_nuevo" id="pro_estado_pro_nuevo" [(ngModel)]="product.pro_estado_pro_nuevo" 
+                #pro_estado_pro_nuevo="ngModel">
+              </bSwitch> 
+            </div>
+            <div class="col-sm-3 text-center" style="font-size: 12px; margin-top: 1%;">
+              <p>¿Marcar como "Más Vendido"?</p>
+              <bSwitch [switch-on-color]="'primary'"
+                class="" style="max-height: 10px !important; max-width: 20px;"
+                [ngClass]="['switch','switch-sidebar-image']" (changeState)="estadoLoMasVendidoTotal($event)"
+                name="pro_estado_mas_vendido" id="pro_estado_mas_vendido" [(ngModel)]="product.pro_estado_mas_vendido"
+                #pro_estado_mas_vendido="ngModel">
+              </bSwitch>
+            </div>
+            <div class="col-sm-3" style="font-size: 12px; margin-top: 1%;">
+              <p>¿Tiene descuento (%)?</p>
+              <bSwitch [switch-on-color]="'primary'" class="" style="max-height: 10px !important; max-width: 20px;"
+                [ngClass]="['switch','switch-sidebar-image']" (changeState)="estadoDecuentoTotal($event)"
+                name="pro_estado_descuento" id="pro_estado_descuento" [(ngModel)]="product.pro_estado_descuento"
+                #pro_estado_descuento="ngModel">
+              </bSwitch>
+              <div *ngIf="product.pro_estado_descuento" class="col-sm-6">
+                <input type="text" class="form-control" name="pro_discount_percentage" id="pro_discount_percentage"
+                  placeholder="Porcentaje de descuento" [(ngModel)]="product.pro_discount_percentage"
+                  #pro_discount_percentage="ngModel" required pattern="">
+                <small
+                  [hidden]="pro_discount_percentage.valid || (pro_discount_percentage.pristine && !formProduct.submitted)"
+                  class="text-danger">
+                  Obligatorio
+                </small>
+              </div>
+            </div>  
+            <div class="col-sm-3 text-center" style="font-size: 12px; margin-top: 1%;">
+              <p>¿Es de temporada?</p>
+              <bSwitch [switch-on-color]="'primary'"
+                class="" style="max-height: 10px !important; max-width: 20px;"
+                [ngClass]="['switch','switch-sidebar-image']" (changeState)="estadoTemporada($event)"
+                name="pro_estado_temporada" id="pro_estado_temporada" [(ngModel)]="product.pro_estado_temporada"
+                #pro_estado_temporada="ngModel">
+              </bSwitch>
+            </div>
+
+           
+          </div>
+          <div class="row">
+            <div class="col-sm-3" style="margin-top: 3%;">
+              <button [disabled]='!formProduct.valid' type="submit" class="btn btn-fill btn-success btn-wd btn-block">
+                <i *ngIf="isEdit" class="fa fa-edit"></i>
+                <i *ngIf="!isEdit" class="fa fa-save"></i>
+                {{isEdit?'Editar':'Agregar'}}
+              </button>
+            </div>
+          </div>
+
+
+          <hr>
+          <div class="row">
+            <!-- <div class="col-sm-4">
+            </div> -->
+            <div class="col-sm-6">
+              <div class="card text-center">
+                <figure>
+                  <img class="img-category-modal" *ngIf="!product.pro_url && !imageSrc"
+                    src="../../../../assets/img/galeria.png">
+                  <img class="img-category-modal" *ngIf="product.pro_url && imageSrc " [src]="product.pro_url">
+                  <img class="img-category-modal" *ngIf="product.pro_url && !imageSrc" [src]="product.pro_url">
+                  <img class="img-category-modal" *ngIf="!product.pro_url && imageSrc" [src]="product.pro_url">
+                </figure>
+                <input id=id type="file" class="form-control" name="url" accept="image/*"
+                  (change)="onChangeImage($event,1)">
+                <input type="hidden" class="form-control" name="pro_url" id="pro_url"
+                  placeholder="Imagen de la categoría" [(ngModel)]="product.pro_url" #pro_url="ngModel" required
+                  pattern="">
+                <small [hidden]="pro_url.valid || (pro_url.pristine && !formProduct.submitted)" class="text-danger">
+                  Obligatorio</small>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card text-center">
+                <figure>
+                  <img class="img-category-modal" *ngIf="!product.pro_url2 && !imageSrc2"
+                    src="../../../../assets/img/galeria.png">
+                  <img class="img-category-modal" *ngIf="product.pro_url2 && imageSrc2 " [src]="product.pro_url2">
+                  <img class="img-category-modal" *ngIf="product.pro_url2 && !imageSrc2" [src]="product.pro_url2">
+                  <img class="img-category-modal" *ngIf="!product.pro_url2 && imageSrc2" [src]="product.pro_url2">
+                </figure>
+                <input id=id type="file" class="form-control" name="url" accept="image/*"
+                  (change)="onChangeImage($event,2)">
+                <input type="hidden" class="form-control" name="pro_url2" id="pro_url2"
+                  placeholder="Imagen de la categoría" [(ngModel)]="product.pro_url2" #pro_url2="ngModel"
+                  pattern="">
+                <small [hidden]="pro_url2.valid || (pro_url2.pristine && !formProduct.submitted)" class="text-danger">
+                  Obligatorio</small>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

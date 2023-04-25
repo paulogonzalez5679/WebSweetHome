@@ -1,0 +1,125 @@
+<div class="modal fade" #modalLogin id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="modalCategoryLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content col-info">
+            <div class="modal-body">
+                <div class="text-center">
+                    <div class="badge-header text-center">
+                        <i class="fa fa-user ico-user"></i>
+                    </div>
+                    <hr>
+                </div>
+                <form #loginForm="ngForm" novalidate (ngSubmit)="onLogin(loginForm.value, loginForm.valid)">
+                    <div class="content">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <a class="fa fas fa-envelope"> </a>
+                                </span>
+                                <input type="email" placeholder="EMAIL" class="form-control" name="email"
+                                    [(ngModel)]="userLogin.email" required #email="ngModel"
+                                    pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$">
+
+                            </div>
+                            <small [hidden]="email.valid || (email.pristine && !loginForm.submitted)"
+                                class="text-danger">
+                                Email inválido.
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <a class="fa fas fa-lock"></a>
+                                </span>
+                                <input type="password" placeholder="CONTRASEÑA" class="form-control" name="password"
+                                    [(ngModel)]="userLogin.password" required minlength="6" #password="ngModel">
+                            </div>
+                            <small [hidden]="password.valid || (password.pristine && !loginForm.submitted)"
+                                class="text-danger">
+                                La contraseña debe tener al menos 6 caracteres.
+                            </small>
+                        </div>
+                        <br>
+                        <div class="row register">
+                            <div class="col-sm-6 text-center">
+                                <a data-dismiss='modal' routerLinkActive="" [routerLink]="['/pages/register']"
+                                    class="login">
+                                    QUIERO REGISTRARME
+                                </a>
+                            </div>
+                            <div class="col-6 no-padding text-align-end" style="cursor: pointer;"> 
+                                <span class="text-password login"
+                                data-dismiss="modal" data-toggle="modal" data-target="#modalForgot">OLVIDE MI CONTRASEÑA</span>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <hr>
+
+                    <div class="row text-center">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8">
+                            <button type="submit" class="btn btn-fill btn-ingresar btn-block btn-wd btn-login">
+                                INGRESAR
+                            </button>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg mx-auto" #modalForgot id="modalForgot" tabindex="-1" role="dialog"
+    aria-labelledby="modalForgot" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg  mx-auto  display-column-center " style="min-height: 80vh;">
+        
+        <div class="modal-content bb  content-form-modal mx-auto display-column-center  mx-auto">
+            <form #recoverForm="ngForm" novalidate (ngSubmit)="recoverPass(recoverForm.value, recoverForm.valid)"
+                class="form-content display-column-center ">
+               
+                
+                <br>
+                <span class="title-login text-center "> RECUPERAR CONTRASEÑA</span>
+                <br>
+                <div class="content display-column-center  mt-3 ">
+                    <div class="form-group div-form">
+                        <div class="input-group  input-form">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"> <img
+                                        src="../../assets/img/logo_inicio.svg" class="img-input" alt="Pass"></span>
+                            </div>
+                            <br>
+                            <input type="email" placeholder="Ingrese su e-mail" type="text" class="form-control"
+                                aria-label="Username" name="email" [(ngModel)]="userLogin.email" required
+                                #email="ngModel" aria-describedby="basic-addon1"
+                                pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$">
+                                <br>
+                            
+                        </div>
+                        <small [hidden]="email.valid || (email.pristine && !recoverForm.submitted)" class="text-danger">
+                            Email inválido.
+                        </small>
+                    </div>
+                </div>
+                <br>
+                <div class="row text-center">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-5" style="margin-bottom: 25px;">
+                        <button type="submit" class="btn btn-fill btn-ingresar btn-block btn-wd btn-login">
+                            Recuperar
+                        </button>
+                    </div>
+                    <!-- <div class="col-sm-1"></div> -->
+                    <div class="col-sm-5" style="margin-bottom: 25px;">
+                        <button type="button" data-dismiss="modal" class="btn btn-fill btn-ingresar btn-block btn-wd btn-login">
+                            CANCELAR
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

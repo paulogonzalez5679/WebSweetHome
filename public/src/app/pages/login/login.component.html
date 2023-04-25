@@ -1,0 +1,72 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0Q46MZES1C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  //gtag('config', 'G-0Q46MZES1C');
+</script>
+
+
+
+<body style="background-color: #ffc009;">
+
+    <div class=" login-page">
+        <a href="/index" >
+            <img style="width: 30%; margin-left: 3rem; padding-top: 3rem" src="../../assets/img/logo_inicio.svg">
+        </a>
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                        <form method="#" action="#">
+                            <div class="card card-hidden">
+                                <div class="header text-center">Login
+                                    <br>
+                                </div>
+                                <form #loginForm="ngForm" novalidate
+                                    (ngSubmit)="onLogin(loginForm.value, loginForm.valid)">
+                                    <div class="content">
+                                        <div class="form-group">
+                                            <label>Correo Electrónico</label>
+                                            <input type="email" placeholder="Ingrese Email" class="form-control"
+                                                name="email" [(ngModel)]="userLogin.email" required #email="ngModel"
+                                                pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$">
+                                            <small [hidden]="email.valid || (email.pristine && !loginForm.submitted)"
+                                                class="text-danger">
+                                                Email inválido.
+                                            </small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Contraseña</label>
+                                            <input type="password" placeholder="Ingrese Contraseña" class="form-control"
+                                                name="password" [(ngModel)]="userLogin.password" required minlength="6"
+                                                #password="ngModel">
+                                            <small
+                                                [hidden]="password.valid || (password.pristine && !loginForm.submitted)"
+                                                class="text-danger">
+                                                ingrese contraseña.
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="footer text-center">
+                                        <button type="submit"
+                                            class="btn btn-fill btn-wd btn-login">Login</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<style>
+    .btn-login:hover{
+        background-color: #ffc009;
+    }
+
+</style>

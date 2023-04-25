@@ -1,0 +1,1674 @@
+<hr class="bg-gradient" style="height:11px;border-width:0; margin-top:0">
+
+<!-- *** Perfil de usuario *** -->
+<div hidden class="row row-w-100 no-margin-row">
+  <div class="col-sm-6">
+  </div>
+  <div class="col-sm-4">&nbsp;</div>
+  <div *ngIf="user!=null||user!=undefined" class="opc text-center col-sm-2">
+    <span class="card-text-grey" style="background-color:#ffc009; padding: 10px;">
+      {{user.user_name}}
+    </span>
+  </div>
+</div>
+<!-- *** /Perfil de usuario *** -->
+
+<!-- *** Barra superior / Logo / bucador / redes /  *** -->
+<div class="row row-w-100 no-margin-row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4 text-center" data-aos="fade-down" data-aos-duration="1500">
+    <img (click)="setIndex()" class="logo-home cursor" src="../../assets/img/logo_inicio.svg">
+  </div>
+  <div class="col-sm-4 text-center iconsSocial">
+    <div class="row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-2 col-xs-4 text-center" data-aos="fade-down" data-aos-duration="1500">
+        <a href="https://www.facebook.com/sweethomeecuador/" target="_blank">
+          <img class="socialnetf"  
+            onmouseover="this.src='../../assets/img/face_amarillo.svg'"
+            onmouseout="this.src='../../assets/img/face_gris.svg'" src="../../assets/img/face_gris.svg" alt="Facebook">
+        </a>
+      </div>
+      <!-- <div class="col-sm-2 col-xs-3 text-center">
+        <a class="" href="" target="_blank">
+          <img class="socialnet" data-aos="fade-down" data-aos-duration="1500"
+            onmouseover="this.src='../../assets/img/twitter_amarillo.svg'"
+            onmouseout="this.src='../../assets/img/twitter_gris.svg'" src="../../assets/img/twitter_gris.svg"
+            alt="Twitter">
+        </a>
+      </div> -->
+      <div class="col-sm-2 col-xs-4 text-center"  data-aos="fade-down" data-aos-duration="1500">
+        <a href="https://instagram.com/sweethomeec?igshid=1imuysil2be2v" target="_blank">
+          <img class="socialnet" 
+            onmouseover="this.src='../../assets/img/insta_amarillo.svg'"
+            onmouseout="this.src='../../assets/img/insta_gris-01.svg'" src="../../assets/img/insta_gris-01.svg"
+            alt="Instagram">
+        </a>
+      </div>
+      <div class="col-sm-2 col-xs-4 text-center">
+        <a href="https://api.whatsapp.com/send?phone=593997944069&text=Saludos,%20deseo%20contactarme%20con%20Sweet Home Ecuador"
+          target="_blank">
+          <img class="socialnet" data-aos="fade-down" data-aos-duration="1500"
+            onmouseover="this.src='../../assets/img/wpp_amarillo.svg'" onmouseout="this.src='../../assets/img/wpp.svg'"
+            src="../../assets/img/wpp.svg" alt="Whatsapp">
+        </a>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div *ngIf="infoUser==null || infoUser==undefined" class="col-sm-5 col-sm-offset-2" style="padding: 10px;" 
+      data-aos="zoom-in" data-aos-duration="1500">
+        <span (click)='viewCart()' class="card-text-y cursor">
+          Iniciar sesión
+        </span>
+      </div>
+      <div *ngIf="infoUser==null || infoUser==undefined" class="col-sm-5" style=" padding: 10px;" data-aos="zoom-in" 
+      data-aos-duration="1500">
+        <span routerLinkActive="" [routerLink]="['/pages/register']" class="card-text-y cursor">
+          Registrarse
+        </span>
+      </div>
+
+      <div *ngIf="(infoUser!=null || infoUser!=undefined) && infoUser.user_type==1" class="col-sm-6 "
+        style="padding: 10px;" data-aos="zoom-in" data-aos-duration="1500">
+        <a class="card-text-y cursor" href="/orders">ADMINISTRACIÓN</a>
+      </div>
+      <div *ngIf="(infoUser!=null || infoUser!=undefined) && infoUser.user_type==1" class="col-sm-6 "
+        style="padding: 10px;" data-aos="zoom-in" data-aos-duration="1500">
+        <a class="card-text-y cursor" (click)="logout()">CERRAR SESIÓN</a>
+      </div>
+      <div *ngIf="(infoUser!=null || infoUser!=undefined) && infoUser.user_type==0" class="col-sm-12 "
+        style="padding: 10px;" data-aos="zoom-in" data-aos-duration="1500">
+        <a  class="card-text-y cursor" (click)='viewWishlist()'>{{infoUser.user_name}}</a> |  
+        <a class="card-text-y cursor" (click)="logout()"> CERRAR SESIÓN</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="init"></div>
+
+<!-- *** BARRA DE BUSQUEDA *** -->
+<div *ngIf="!showWishlist" class="row row-w-100 justify-content-center">
+  <div class="col-sm-6 col-sm-offset-3 text-center" data-aos="zoom-in" data-aos-duration="1500">
+    <div class="brand">
+      <div *ngIf="!showAllProducts" class="b-search">
+        <input type="text" name="searchTexts" id="searchTexts" [(ngModel)]="searchText" #searchTexts="ngModel"
+          placeholder="BUSCAR">
+        <button class="btn-search" (click)="showAllProductComponent(category, '', 'all')">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- *** BARRA DE BUSQUEDA *** -->
+
+<div *ngIf="!showWishlist" class="container-fostrap xs-hidden">
+  <div class="container">
+    <div class="">
+      <div class="col-sm-4" style="border-style: none;" data-aos="fade-down" data-aos-duration="1500">
+        <div class=" text-center " style="border-style: none;">
+          <div class="card-content">
+            <h4 class="opc text-center cursor" (click)="viewRouter('#quienesSomos',1000)">
+              QUIÉNES SOMOS
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 text-center" data-aos="fade-down" data-aos-duration="1500">
+        <div class=" text-center">
+          <div class="card-content">
+            <h4 class="opc text-center cursor" (click)="viewRouter('#identidadC',1200)">
+              IDENTIDAD C.
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 text-center" data-aos="fade-down" data-aos-duration="1500">
+        <div class=" text-center">
+          <div class="card-content">
+            <h4  class="opc text-center cursor " (click)="viewRouter('#contactos',1200)">
+              CONTACTOS
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- *** /Barra superior / Logo / bucador / redes /  *** -->
+
+<!-- *** Menu/nabvar *** -->
+<app-navbar *ngIf="!showWishlist" [arraySubCategory]='arraySubCategory' [arrayCategory]='arrayCategory'></app-navbar>
+<!-- *** #Menu/nabvar *** -->
+
+<!-- *** Menu/nabvar para wishlist *** -->
+<div *ngIf="showWishlist" class="row row-w-100 section-perfil">
+  <div class="col-sm-10 text-right user user-name">
+    Hola, {{infoUser.user_name}} {{infoUser.user_lastname}}
+  </div>
+  <div class="col-sm-2 text-right">
+    <button type="button" class="btn btn-light btn-block m-4" (click)="logout()">
+      CERRAR SESIÓN
+    </button>
+  </div>
+</div>
+<div *ngIf="showWishlist" style="height: 12px; background-color: #606060; margin-top: 0px; margin-bottom: 40px;"></div>
+<!-- <app-list-wishlist *ngIf="showWishlist"></app-list-wishlist> -->
+
+<!-- *** Menu/nabvar para wishlist *** -->
+
+<!-- *** fixedButton / Carrito flotante *** -->
+<div class="container-fluid">
+  <div class="scrolling fixed">
+    <div class="row row-w-100">
+      <div class="col-xs-6 cursor" (click)="arrayProductCart.length!=0 ? viewCart() : shorAlert()">
+        <span class="badge badge-danger">{{arrayProductCart.length}}</span>
+        <img src="../../assets/img/carrito_logo.svg">
+      </div>
+      <div (click)='viewWishlist()' class="col-xs-6 cursor" style="border-left: 1px solid white;">
+        <span class="badge badge-danger">{{arrayWishlist.length}}</span>
+        <img src="../../assets/img/corazon.svg">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- *** fixedButton / Carrito flotante *** -->
+
+<app-list-product [index]='index' [arrayCategory]='arrayCategory' [category]="category" [subcategory]='subcategory'
+  [campoDB]='campoDB' [showCategory]="showCategory" *ngIf="!showCart&&showAllProducts&&!showWishlist">
+</app-list-product>
+<app-list-wishlist *ngIf="showWishlist&&!showAllProducts&&!showCart" [arrayWishlist]='arrayWishlist'>
+</app-list-wishlist>
+
+<!-- *** Carrito de compras *** -->
+<ng-container *ngIf="showCart">
+  <app-carrito [arrayProductCart]='arrayProductCart'></app-carrito>
+</ng-container>
+<!-- *** /Carrito de compras *** -->
+
+<ng-container *ngIf="!showCart&&!showAllProducts&&!showWishlist">
+  <!-- *** Carousel *** -->
+  <section>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="z-index: 0 !important;">
+      <div class="carousel-inner">
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="botones-carrusel active"></li>
+          <li data-target="#myCarousel" data-slide-to="1" class="botones-carrusel"></li>
+          <li data-target="#myCarousel" data-slide-to="2" class="botones-carrusel"></li>
+          <li data-target="#myCarousel" data-slide-to="3" class="botones-carrusel"></li>
+        </ol>
+        <div class="item active">
+          <img src="../../assets/img/portada1.jpg" style="width: 100%;">
+        </div>
+        <div class="item">
+          <img src="../../assets/img/portada2.jpg" style="width: 100%;">
+        </div>
+        <div class="item">
+          <img src="../../assets/img/portada3.jpg" style="width: 100%;">
+        </div>
+        <div class="item">
+          <img src="../../assets/img/portada4.jpg" style="width: 100%;">
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="fa fa-arrow-left"></span>
+      </a>
+      <a class="right carousel-control text-right" href="#myCarousel" data-slide="next">
+        <span class="fa fa-arrow-right text-right !important"></span>
+      </a>
+    </div>
+  </section>
+  <!-- *** #Carousel *** -->
+
+  <!-- *** Seccion Cards de productos *** -->
+  <section class="content-section" id="serviciosSection" >
+    <div class="row row-w-100"data-aos="zoom-in" data-aos-duration="3500">
+      <div class="col-sm-12 text-center" >
+        <img class="img-titles" src="../../assets/img/icono1.svg" alt="">
+        <img class="img-titles-inferior" src="../../assets/img/nuestros productos.svg" alt="">
+      </div>
+      <div class="row row-w-100 " >
+        <div class="col-sm-8 col-sm-offset-2 text-center">
+          <p class="p-experiencia">
+            La experiencia en Sweet Home será inolvidable, la podrás vivir en familia y encontrar artículos ideales
+            para que todos los miembros se sientan especiales.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row row-servicios text-center" style="justify-content: space-between;">
+      <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1 xs-hidden">
+      </div>
+      <div (click)="showAllProductComponent('Salas', '', 'all',0)"
+        class="col-xs-6 col-sm-3 col-md-2 col-lg-2 paddding-0" style="padding: 0px;">
+        <div (mouseover)="tests('icoServ1')" (mouseout)="tests2('icoServ1')"  class="card-servicios" id="cardServ1">
+          <img data-aos="flip-left" data-aos-duration="3000" 
+          class="img-icons-servicios mb-4 mx-auto  " id="icoServ1" [src]="imgSrc1" alt="SALAS">
+          <p class="card-text-grey">SALAS</p>
+        </div>
+      </div>
+      <div (click)="showAllProductComponent('Comedores', '', 'all',4)"
+        class="col-xs-6 col-sm-3 col-md-2 col-lg-2 paddding-0">
+        <div (mouseover)="tests('icoServ2')" (mouseout)="tests2('icoServ2')"  class="card-servicios" id="cardServ2">
+          <img  data-aos="flip-left" data-aos-duration="3000" 
+          class="img-icons-servicios mb-4 mx-auto  " id="icoServ2" [src]="imgSrc2" alt="COMEDORES">
+          <p class="card-text-grey">COMEDORES</p>
+        </div>
+      </div>
+      <div (click)="showAllProductComponent('Dormitorios', '', 'all',5)"
+        class="col-xs-6 col-sm-3 col-md-2 col-lg-2 paddding-0">
+        <div (mouseover)="tests('icoServ3')" (mouseout)="tests2('icoServ3')"  class="card-servicios" id="cardServ3">
+          <img data-aos="flip-left" data-aos-duration="3000"
+          class="img-icons-servicios mb-4 mx-auto" id="icoServ3" [src]="imgSrc3" alt="DORMITORIOS">
+          <p class="card-text-grey">DORMITORIOS</p>
+        </div>
+      </div>
+      <div (click)="showAllProductComponent('Decoración', '', 'all',2)"
+        class="col-xs-6 col-sm-3 col-md-2 col-lg-2 paddding-0">
+        <div (mouseover)="tests('icoServ4')" (mouseout)="tests2('icoServ4')"  class="card-servicios" id="cardServ4">
+          <img data-aos="flip-left" data-aos-duration="3000"
+          class="img-icons-servicios mb-4 mx-auto" id="icoServ4" [src]="imgSrc4" alt="DECORACION">
+          <p class="card-text-grey">DECORACION</p>
+        </div>
+      </div>
+      <div (click)="showAllProductComponent('Escritorios', '', 'all',8)"
+        class="col-xs-6 col-sm-3 col-md-2 col-lg-2 paddding-0">
+        <div (mouseover)="tests('icoServ5')" (mouseout)="tests2('icoServ5')" class="card-servicios" id="cardServ5">
+          <img data-aos="flip-left" data-aos-duration="3000"
+          class="img-icons-servicios mb-4 mx-auto" id="icoServ5" [src]="imgSrc5" alt="ESCRITORIO">
+          <p class="card-text-grey">ESCRITORIOS</p>
+        </div>
+      </div>
+      <!-- </div>
+    <div class="row row-servicios text-center"> -->
+      <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1 xs-hidden">
+
+      </div>
+      <br>
+      <div (click)="showAllProductComponent('Exteriores', '', 'all',7)"
+        class="col-xs-6 col-sm-3 col-md-2 col-md-offset-1 col-lg-2 paddding-0">
+        <div (mouseover)="tests('icoServ6')" (mouseout)="tests2('icoServ6')"  class="card-servicios" id="cardServ6">
+          <img data-aos="flip-left" data-aos-duration="3000" class="img-icons-servicios mb-4 mx-auto" id="icoServ6" [src]="imgSrc6" alt="EXTERIORES">
+          <p class="card-text-grey">EXTERIORES</p>
+        </div>
+      </div>
+      <div (click)="showAllProductComponent('Alfombras', '', 'all',6)"
+        class="col-xs-6 col-sm-3 col-md-2 col-lg-2 paddding-0">
+        <div (mouseover)="tests('icoServ7')" (mouseout)="tests2('icoServ7')"  class="card-servicios" id="cardServ7">
+          <img data-aos="flip-left" data-aos-duration="3000" 
+          class="img-icons-servicios mb-4 mx-auto" id="icoServ7" [src]="imgSrc7" alt="ALFOMBRAS">
+          <p class="card-text-grey">ALFOMBRAS</p>
+        </div>
+      </div>
+      <div (click)="showAllProductComponent('Iluminación', '', 'all',10)"
+        class="col-xs-6 col-sm-3 col-md-2 col-lg-2 paddding-0">
+        <div (mouseover)="tests('icoServ8')" (mouseout)="tests2('icoServ8')"  class="card-servicios" id="cardServ8">
+          <img data-aos="flip-left" data-aos-duration="3000" 
+          class="img-icons-servicios mb-4 mx-auto" id="icoServ8" [src]="imgSrc8" alt="ILUMINACION">
+          <p class="card-text-grey">ILUMINACIÓN</p>
+        </div>
+      </div>
+      <div (click)="showAllProductComponent('Bar', '', 'all',3)" class="col-xs-6 col-sm-3 col-md-2 col-lg-2 paddding-0">
+        <div (mouseover)="tests('icoServ9')" (mouseout)="tests2('icoServ9')" class="card-servicios" id="cardServ9">
+          <img  data-aos="flip-left" data-aos-duration="3000" class="img-icons-servicios mb-4 mx-auto" id="icoServ9" [src]="imgSrc9" alt="BAR">
+          <p class="card-text-grey">BAR</p>
+        </div>
+      </div>
+      <div (click)="showAllProductComponent('Niños', '', 'all',1)"
+        class="col-xs-6 col-sm-3 col-md-2 col-lg-2 paddding-0">
+        <div (mouseover)="tests('icoServ10')" (mouseout)="tests2('icoServ10')"  class="card-servicios" id="cardServ10">
+          <img data-aos="flip-left" data-aos-duration="3000" class="img-icons-servicios mb-4 mx-auto" id="icoServ10" [src]="imgSrc10" alt="NIÑOS">
+          <p class="card-text-grey">NIÑOS</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- *** /Seccion de productos *** -->
+
+  <!--Panel "lo mas vendido"-->
+  <section class="section-container" data-aos="zoom-in" data-aos-duration="3000">
+    <div class="text-left pannels200" (click)="showAllProductComponent('all', '', 'pro_estado_mas_vendido')">
+      <img class="card-img-ofertas1 cursor" src="../../assets/img/lo mas vendido.svg" alt="ofertas y descuentos">
+    </div>
+  </section>
+  <!--#Panel "lo mas vendido"-->
+
+  <div class="card card-section">
+    <!--SECCION SALAS-->
+    <section class="">
+      <div class="row no-margin-row" data-aos="flip-left"
+     data-aos-easing="ease-out-cubic"
+     data-aos-duration="3000">
+        <div class="col-xs-12 col-sm-4 col-sm-push-7">
+          <div class="card row-salas">
+            <div class="rectangulo"></div>
+            <h2 class="titulo-salas text-right">SALAS</h2>
+            <p class="text-right valores3 ">
+              Tu hogar debe contar la historia de quién eres y ser una colección de lo que amas.
+            </p>
+            <div class="text-right cursor" style="margin-top: 50px">
+              <img (click)="viewRouter('#contactos',1200)" class="imgContactos cursor"
+                src="../../assets/img/contactos.svg" alt="SALAS">
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-7 col-sm-pull-4">
+          <img class="card-img" src="../../assets/img/salas.jpg" alt="SALAS">
+        </div>
+        <div class="col-sm-1 no-padding text-right">
+          <div class="rectangulo-amarillo md-hidden"></div>
+        </div>
+      </div>
+      <!-- <div class="row no-margin-row">
+        <div class="col-md-7 col-sm-12 col-md-push-7" style="margin: 0 auto; padding: 0px !important;">
+        </div>
+        <div class="col-md-4 col-sm-12 col-md-pull-4">
+          
+        </div>
+        <div class="col-md-1 no-padding text-right">
+          <div class="rectangulo-amarillo md-hidden"></div>
+        </div>
+      </div> -->
+      <div class="container-fostrap">
+        <div class="row row-w-100">
+          <div class="col-xs-4 col-sm-4">
+            <div class=" text-center ">
+              <div class="card-content" (click)="cambioMasvendido(1)">
+                <h4 class="opc1 text-center cursor {{this.show==1?'opt-active':''}}" data-aos="zoom-in"
+                data-aos-duration="3000">
+                  LO MÁS VENDIDO
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-4 col-sm-4 text-center">
+            <div class=" text-center">
+              <div class="card-content" (click)="cambioMasvendido(2)">
+                <h4 class="opc1 text-center cursor {{this.show==2?'opt-active':''}}" data-aos="zoom-in"
+                data-aos-duration="3000">
+                  NUEVOS
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-4 col-sm-4 text-center">
+            <div class=" text-center">
+              <div class="card-content">
+                <h4 class="opc1 text-center cursor" (click)="showAllProductComponent('Salas', '', 'all',0)" data-aos="zoom-in"
+                data-aos-duration="3000">
+                  PRODUCTOS
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- *** SECCION SALAS *** -->
+
+    <!--PRODUCTOS SALAS LO MAS VENDIDO-->
+    <section class="" data-aos="zoom-in"
+    data-aos-duration="3000">
+      <div class="container-fostrap">
+        <div class="" *ngIf="show==1">
+          <div class="row no-margin-row display-center-row row-w-100">
+            <div class="col-sm-12" style="margin: 0 auto !important;">
+              <ng-container *ngFor="let product of arrayProduct">
+                <div class="col-xs-6 col-sm-4 p-0"
+                  *ngIf="product.pro_categoria=='Salas' && product.pro_estado_novedad== true">
+                  <div class="card text-center">
+                    <div class="container44">
+                      <!-- <section>
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="z-index: 0 !important;">
+                          <div class="carousel-inner">
+                            <ol class="carousel-indicators">
+                              <li data-target="#myCarousel" data-slide-to="0" class="botones-carrusel active"></li>
+                              <li data-target="#myCarousel" data-slide-to="1" class="botones-carrusel"></li>
+                            </ol>
+                            <div class="item active">
+                              <img class="img-card" src="{{product.pro_url}}" alt="{{product.pro_nombre}}" style="width: 100%;">
+                            </div>
+                            <div class="item">
+                              <img class="img-card" src="{{product.pro_url2}}" alt="{{product.pro_nombre}}" style="width: 100%;">
+                            </div>
+                          </div>
+                          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                            <span class="fa fa-arrow-left"></span>
+                          </a>
+                          <a class="right carousel-control text-right" href="#myCarousel" data-slide="next">
+                            <span class="fa fa-arrow-right text-right !important"></span>
+                          </a>
+                        </div>
+                      </section> -->
+                      <img class="img-card" src="{{product.pro_url}}" alt="{{product.pro_nombre}}"  >
+                      <div class="row buttons-opt row-w-70">
+                        <div class="col-xs-4 col-sm-4 text-right">
+                          <button (click)='agregarCarrito(product)' type="button" class="btn1" id="newquote"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 text-center">
+                          <button type="button" (click)='addWishList(product)' class="btn2" id="newquote"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 text-left">
+                          <button type="button" (click)='viewDetails(product)' class="btn3" id="newquote"></button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="">
+                      <h4 class="titulo-salas2 text-center">
+                        {{product.pro_nombre}}
+                      </h4>
+                      <p class="precios text-center xs-hidden">
+                        <span *ngIf="!product.pro_estado_descuento"><br> ${{product.pro_precio}} </span>
+                        <span *ngIf="product.pro_estado_descuento" style="text-decoration: line-through;">
+                          Antes: ${{product.pro_precio}}
+                        </span>
+                        <br>
+                        <span *ngIf="!product.pro_estado_descuento">&nbsp;</span>
+                        <span *ngIf="product.pro_estado_descuento">
+                          <span style="color: red;">{{product.pro_discount_percentage}}% de descuento</span>
+                          <br>
+                          AHORA: ${{product.pro_precio-((product.pro_discount_percentage*product.pro_precio)/100)|number}}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--PRODUCTOS SALAS NUEVOS-->
+    <section class="" data-aos="zoom-in"
+    data-aos-duration="3000">
+      <div class="container-fostrap">
+        <div class="" *ngIf="show==2">
+          <div class="row no-margin-row display-center-row row-w-100">
+            <div class="col-sm-12" style="margin: 0 auto !important;">
+              <ng-container *ngFor="let product of arrayProduct">
+                <div class="col-xs-6 col-sm-4 p-0"
+                  *ngIf="product.pro_categoria=='Salas' && product.pro_estado_nuevo== true">
+                  <div class="card text-center">
+                    <div class="container44">
+                      <img class="img-card" src="{{product.pro_url}}" alt="{{product.pro_nombre}}">
+                      <div class="row buttons-opt row-w-70">
+                        <div class="col-xs-4 col-sm-4 text-right">
+                          <button (click)='agregarCarrito(product)' type="button" class="btn1" id="newquote"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 text-center">
+                          <button type="button" (click)='addWishList(product)' class="btn2" id="newquote"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 text-left">
+                          <button type="button" (click)='viewDetails(product)' class="btn3" id="newquote"></button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="">
+                      <h4 class="titulo-salas2 text-center">
+                        {{product.pro_nombre}}
+                      </h4>
+                      <p class="precios text-center xs-hidden">
+                        <span *ngIf="!product.pro_estado_descuento"><br> ${{product.pro_precio}} </span>
+                        <span *ngIf="product.pro_estado_descuento" style="text-decoration: line-through;">
+                          Antes: ${{product.pro_precio}}
+                        </span>
+                        <br>
+                        <span *ngIf="!product.pro_estado_descuento">&nbsp;</span>
+                        <span *ngIf="product.pro_estado_descuento">
+                          <span style="color: red;">{{product.pro_discount_percentage}}% de descuento</span>
+                          <br>
+                          AHORA: ${{product.pro_precio-((product.pro_discount_percentage*product.pro_precio)/100)|number}}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/PRODUCTOS SALAS NUEVOS-->
+  </div>
+
+  <!--SECCION OFERTAS Y DESCUENTOS-->
+  <section class="section-container" data-aos="zoom-in"
+  data-aos-duration="3000">
+    <div class="text-right">
+      <div class="text-right pannels100 cursor" (click)="showAllProductComponent('all', '', 'pro_estado_descuento')">
+        <img class="card-img-ofertas1" src="../../assets/img/ofertas.svg" alt="ofertas y descuentos">
+      </div>
+    </div>
+  </section>
+
+  <!--SECCION DORMITORIOS-->
+  <div class="card card-section">
+
+    <section class="section-container"  data-aos="flip-left" data-aos-duration="3000">
+      <div class="row no-margin-row">
+        <div class="col-md-1 no-padding text-right">
+          <div class="rectangulo-amarillo-left md-hidden"></div>
+        </div>
+        <div class="col-md-4">
+          <div class="card row-salas ">
+            <div class="rectangulo"></div>
+            <h2 class="titulo-dormitorio text-left">DORMITIORIOS</h2>
+            <p class="text-left valores3">
+              Tu dormitorio tiene que ser especial, perfecto y acogedor.
+            </p>
+            <div class="text-left cursor" style="margin-top: 50px">
+              <img (click)="viewRouter('#contactos',1200)" class="imgContactos cursor"
+                src="../../assets/img/contactos.svg" alt="SALAS">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7" style="margin: 0 auto; padding: 0px !important;">
+          <img class="card-img" src="../../assets/img/dormitarios.jpg" alt="SALAS">
+        </div>
+      </div>
+    </section>
+
+    <!--MENU DORMITORIOS-->
+    <div class="container-fostrap section-container" >
+      <div class="">
+        <div class="">
+          <div class="row row-w-100">
+            <div class="col-xs-4 col-sm-4" style="border-style: none;">
+              <div class=" text-center " style="border-style: none;">
+                <div class="card-content" (click)="cambioMasvendido2(1)">
+                  <h4 class="opc1 text-center cursor {{this.show2==1?'opt-active':''}}" data-aos="zoom-in"
+                  data-aos-duration="3000">
+                    LO MÁS VENDIDO
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4 col-sm-4 text-center">
+              <div class=" text-center">
+                <div class="card-content" (click)="cambioMasvendido2(2)">
+                  <h4 class="opc1 text-center cursor {{this.show2==2?'opt-active':''}}" data-aos="zoom-in"
+                  data-aos-duration="3000">
+                    NUEVOS
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4 col-sm-4 text-center">
+              <div class=" text-center">
+                <div class="card-content">
+                  <h4 class="opc1 text-center cursor" (click)="showAllProductComponent('Dormitorios', '', 'all', 5)" data-aos="zoom-in"
+                  data-aos-duration="3000">
+                    PRODUCTOS
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--PRODUCTOS DORMITORIOS LOS MAS VENDIDO-->
+    <section class="">
+      <div class="container-fostrap" data-aos="zoom-in"
+      data-aos-duration="3000">
+        <div class="" *ngIf="show2==1">
+          <div class="row no-margin-row display-center-row">
+            <div class="col-sm-12" style="margin: 0 auto;">
+              <ng-container *ngFor="let product of arrayProduct">
+                <div class="col-xs-6 col-sm-4 p-0"
+                  *ngIf="product.pro_categoria=='Dormitorios' && product.pro_estado_novedad== true">
+                  <div class="card text-center">
+                    <div class="container44">
+                      <img class="img-card" src="{{product.pro_url}}" alt="{{product.pro_nombre}}">
+                      <div class="row buttons-opt row-w-70">
+                        <div class="col-xs-4 col-sm-4 text-right">
+                          <button (click)='agregarCarrito(product)' type="button" class="btn1" id="newquote"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 text-center">
+                          <button type="button" (click)='addWishList(product)' class="btn2" id="newquote"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 text-left">
+                          <button type="button" (click)='viewDetails(product)' class="btn3" id="newquote"></button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="">
+                      <h4 class="titulo-salas2 text-center">
+                        {{product.pro_nombre}}
+                      </h4>
+                      <p class="precios text-center xs-hidden">
+                        <span *ngIf="!product.pro_estado_descuento"><br> ${{product.pro_precio}} </span>
+                        <span *ngIf="product.pro_estado_descuento" style="text-decoration: line-through;">
+                          Antes: ${{product.pro_precio}}
+                        </span>
+                        <br>
+                        <span *ngIf="!product.pro_estado_descuento">&nbsp;</span>
+                        <span *ngIf="product.pro_estado_descuento">
+                          <span style="color: red;">{{product.pro_discount_percentage}}% de descuento</span>
+                          <br>
+                          AHORA: ${{product.pro_precio-((product.pro_discount_percentage*product.pro_precio)/100)|number}}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--PRODUCTOS DORMITORIOS LOS MAS NUEVO-->
+    <section class="">
+      <div class="container-fostrap">
+        <div class="" *ngIf="show2==2">
+          <div class="row display-center-row no-margin-row">
+            <div class="col-sm-12">
+              <ng-container *ngFor="let product of arrayProduct">
+                <div class="col-xs-6 col-sm-4 p-0"
+                  *ngIf="product.pro_categoria=='Dormitorios' && product.pro_estado_nuevo== true">
+                  <div class="card text-center">
+                    <div class="container44">
+                      <img class="img-card" src="{{product.pro_url}}" alt="{{product.pro_nombre}}">
+                      <div class="row buttons-opt row-w-70">
+                        <div class="col-xs-4 col-sm-4 text-right">
+                          <button (click)='agregarCarrito(product)' type="button" class="btn1" id="newquote"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 text-center">
+                          <button type="button" (click)='addWishList(product)' class="btn2" id="newquote"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 text-left">
+                          <button type="button" (click)='viewDetails(product)' class="btn3" id="newquote"></button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="">
+                      <h4 class="titulo-salas2 text-center">
+                        {{product.pro_nombre}}
+                      </h4>
+                      <p class="precios text-center xs-hidden">
+                        <span *ngIf="!product.pro_estado_descuento"><br> ${{product.pro_precio}} </span>
+                        <span *ngIf="product.pro_estado_descuento" style="text-decoration: line-through;">
+                          Antes: ${{product.pro_precio}}
+                        </span>
+                        <br>
+                        <span *ngIf="!product.pro_estado_descuento">&nbsp;</span>
+                        <span *ngIf="product.pro_estado_descuento">
+                          <span style="color: red;">{{product.pro_discount_percentage}}% de descuento</span>
+                          <br>
+                          AHORA: ${{product.pro_precio-((product.pro_discount_percentage*product.pro_precio)/100)|number}}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+
+  <div class="card card-section">
+
+    <!--SECCION DECORACION-->
+    <section class="section-container" data-aos="flip-left"
+    data-aos-duration="3000">
+      <div class="row no-margin-row">
+        <div class="col-xs-12 col-sm-4 col-sm-push-7">
+          <div class="card row-salas">
+            <div class="rectangulo"></div>
+            <h2 class="titulo-salas text-right ">DECORACIÓN</h2>
+            <p class="text-right valores3">
+              Tus espacios se volverán únicos con los detalles correctos.
+            </p>
+            <div class="text-right cursor" style="margin-top: 50px">
+              <img (click)="viewRouter('#contactos',1200)" class="imgContactos cursor"
+                src="../../assets/img/contactos.svg" alt="SALAS">
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-7 col-sm-pull-4">
+          <img class="card-img" src="../../assets/img/decoracion3.jpg" alt="SALAS">
+        </div>
+        <div class="col-sm-1 no-padding text-right">
+          <div class="rectangulo-amarillo md-hidden"></div>
+        </div>
+      </div>
+
+
+      <!-- 
+      <div class="row no-margin-row">
+        <div class="col-md-7" style="margin: 0 auto; padding: 0px !important;">
+          <img class="card-img" src="../../assets/img/decoracion3.jpg" alt="SALAS">
+        </div>
+        <div class="col-md-4">
+          <div class="card row-salas">
+            <div class="rectangulo"></div>
+            <h2 class="titulo-salas text-right ">DECORACIÓN</h2>
+            <p class="text-right valores3 xs-hidden">
+              Lorem ipsum dolor sit amet, con- sectetuer adipiscing elit, sed
+              diam nonummy nibh euismod
+            </p>
+            <div class="text-right cursor" style="margin-top: 50px">
+              <img (click)="viewRouter('#contactos',1200)" class="imgContactos cursor"
+                src="../../assets/img/contactos.svg" alt="SALAS">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1 no-padding text-right">
+          <div class="rectangulo-amarillo md-hidden"></div>
+        </div>
+      </div> -->
+      <div class="container-fostrap">
+        <div class="row row-w-100">
+          <div class="col-xs-4 col-sm-4">
+            <div class=" text-center ">
+              <div class="card-content" (click)="cambioMasvendido3(1)">
+                <h4 class="opc1 text-center cursor {{this.show3==1?'opt-active':''}}">
+                  LO MÁS VENDIDO
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-4 col-sm-4 text-center">
+            <div class=" text-center">
+              <div class="card-content" (click)="cambioMasvendido3(2)">
+                <h4 class="opc1 text-center cursor {{this.show3==2?'opt-active':''}}">
+                  NUEVOS
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-4 col-sm-4 text-center">
+            <div class=" text-center">
+              <div class="card-content">
+                <h4 class="opc1 text-center cursor" (click)="showAllProductComponent('Decoración', '', 'all',2)">
+                  PRODUCTOS
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!--PRODUCTOS DECORACION MAS VENDIDOS-->
+    <section class="">
+      <div class="container-fostrap">
+        <div class="" *ngIf="show3==1">
+          <div class="row display-center-row no-margin-row">
+            <div class="col-sm-12" style="margin: 0 auto !important;">
+              <ng-container *ngFor="let product of arrayProduct">
+                <div class="col-xs-6 col-sm-4 p-0"
+                  *ngIf="product.pro_categoria=='Decoración' && product.pro_estado_novedad== true">
+                  <div class="card text-center">
+                    <div class="container44">
+                      <img class="img-card" src="{{product.pro_url}}" alt="{{product.pro_nombre}}">
+                      <div class="row buttons-opt row-w-70">
+                        <div class="col-xs-4 col-sm-4 text-right">
+                          <button (click)='agregarCarrito(product)' type="button" class="btn1" id="newquote"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 text-center">
+                          <button type="button" (click)='addWishList(product)' class="btn2" id="newquote"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 text-left">
+                          <button type="button" (click)='viewDetails(product)' class="btn3" id="newquote"></button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="">
+                      <h4 class="titulo-salas2 text-center">
+                        {{product.pro_nombre}}
+                      </h4>
+                      <p class="precios text-center xs-hidden">
+                        <span *ngIf="!product.pro_estado_descuento"><br> ${{product.pro_precio}} </span>
+                        <span *ngIf="product.pro_estado_descuento" style="text-decoration: line-through;">
+                          Antes: ${{product.pro_precio}}
+                        </span>
+                        <br>
+                        <span *ngIf="!product.pro_estado_descuento">&nbsp;</span>
+                        <span *ngIf="product.pro_estado_descuento">
+                          <span style="color: red;">{{product.pro_discount_percentage}}% de descuento</span>
+                          <br>
+                          AHORA: ${{product.pro_precio-((product.pro_discount_percentage*product.pro_precio)/100)|number}}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+    <!--PRODUCTOS DECORACION NUEVOS-->
+    <section class="">
+      <div class="container-fostrap">
+        <div class="" *ngIf="show3==2">
+          <div class="row display-center-row no-margin-row">
+            <div class="col-sm-12" style="margin: 0 auto !important;">
+              <ng-container *ngFor="let product of arrayProduct">
+                <div class="col-xs-6 col-sm-4 p-0"
+                  *ngIf="product.pro_categoria=='Decoración' && product.pro_estado_nuevo== true">
+                  <div class="card text-center">
+                    <div class="container44">
+                      <img class="img-card" src="{{product.pro_url}}" alt="{{product.pro_nombre}}">
+                      <div class="row buttons-opt row-w-70">
+                        <div class="col-xs-4 col-sm-4 text-right">
+                          <button (click)='agregarCarrito(product)' type="button" class="btn1" id="newquote"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 text-center">
+                          <button type="button" (click)='addWishList(product)' class="btn2" id="newquote"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 text-left">
+                          <button type="button" (click)='viewDetails(product)' class="btn3" id="newquote"></button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="">
+                      <h4 class="titulo-salas2 text-center">
+                        {{product.pro_nombre}}
+                      </h4>
+                      <p class="precios text-center xs-hidden">
+                        <span *ngIf="!product.pro_estado_descuento"><br> ${{product.pro_precio}} </span>
+                        <span *ngIf="product.pro_estado_descuento" style="text-decoration: line-through;">
+                          Antes: ${{product.pro_precio}}
+                        </span>
+                        <br>
+                        <span *ngIf="!product.pro_estado_descuento">&nbsp;</span>
+                        <span *ngIf="product.pro_estado_descuento">
+                          <span style="color: red;">{{product.pro_discount_percentage}}% de descuento</span>
+                          <br>
+                          AHORA: ${{product.pro_precio-((product.pro_discount_percentage*product.pro_precio)/100)|number}}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </div>
+
+
+<div *ngFor="let categorias of arrayCategory">
+  <div class="card card-section" *ngIf="categorias.nombre == 'Navidad' && categorias.category_state==true" >
+
+    <!--SECCION NAVIDAD-->
+    <section class="">
+      <div class="card-img-navidad img-responsive">
+        <div>
+          <img class="pannelFront-navidad" src="../../assets/img/navidad.svg" />
+        </div>
+      </div>
+    </section>
+
+    <!--MENU NAVIDAD-->
+
+    <div class="container-fostrap section-container">
+      <div class="">
+        <div class="">
+          <div class="row row-w-100">
+            <div class="col-xs-4 col-sm-4" style="border-style: none;">
+              <div class=" text-center " style="border-style: none;">
+                <div class="card-content" (click)="cambioMasvendido4(1)">
+                  <h4 class="opc1 text-center cursor {{this.show4==1?'opt-active':''}}">
+                    LO MÁS VENDIDO
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4 col-sm-4 text-center">
+              <div class=" text-center">
+                <div class="card-content" (click)="cambioMasvendido4(2)">
+                  <h4 class="opc1 text-center cursor {{this.show4==2?'opt-active':''}}">
+                    NUEVOS
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4 col-sm-4 text-center">
+              <div class=" text-center">
+                <div class="card-content">
+                  <h4 class="opc1 text-center cursor" (click)="showAllProductComponent('Navidad', '', 'all',9)">
+                    PRODUCTOS
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--PRODUCTOS NAVIDAD MAS VENDIDOS-->
+    <section >
+      <div class="container-fostrap">
+        <div class="" *ngIf="show4==1">
+          <div class="row display-center-row no-margin-row">
+            <div class="col-sm-12" style="margin: 0 auto !important;">
+              <ng-container *ngFor="let product of arrayProduct">
+                <div class="col-xs-6 col-sm-4 p-0"
+                  *ngIf="product.pro_categoria=='Navidad' && product.pro_estado_novedad== true">
+                  <div class="card text-center">
+                    <div class="container44">
+                      <img class="img-card" src="{{product.pro_url}}" alt="{{product.pro_nombre}}">
+                      <div class="row buttons-opt row-w-70">
+                        <div class="col-xs-4 col-sm-4 text-right">
+                          <button (click)='agregarCarrito(product)' type="button" class="btn1" id="newquote"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 text-center">
+                          <button type="button" (click)='addWishList(product)' class="btn2" id="newquote"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 text-left">
+                          <button type="button" (click)='viewDetails(product)' class="btn3" id="newquote"></button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="">
+                      <h4 class="titulo-salas2 text-center">
+                        {{product.pro_nombre}}
+                      </h4>
+                      <p class="precios text-center xs-hidden">
+                        <span *ngIf="!product.pro_estado_descuento"><br> ${{product.pro_precio}} </span>
+                        <span *ngIf="product.pro_estado_descuento" style="text-decoration: line-through;">
+                          Antes: ${{product.pro_precio}}
+                        </span>
+                        <br>
+                        <span *ngIf="!product.pro_estado_descuento">&nbsp;</span>
+                        <span *ngIf="product.pro_estado_descuento">
+                          <span style="color: red;">{{product.pro_discount_percentage}}% de descuento</span>
+                          <br>
+                          AHORA: ${{product.pro_precio-((product.pro_discount_percentage*product.pro_precio)/100)|number}}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--PRODUCTOS NAVIDAD NUEVOS-->
+    <section class="" >
+      <div class="container-fostrap">
+        <div class="" *ngIf="show4==2">
+          <div class="row no-margin-row display-center-row row-w-100">
+            <div class="col-sm-12" style="margin: 0 auto !important;">
+              <ng-container *ngFor="let product of arrayProduct">
+                <div class="col-xs-6 col-sm-4 p-0"
+                  *ngIf="product.pro_categoria=='Navidad' && product.pro_estado_nuevo== true">
+                  <div class="card text-center">
+                    <div class="container44">
+                      <img class="img-card" src="{{product.pro_url}}" alt="{{product.pro_nombre}}">
+                      <div class="row buttons-opt row-w-70">
+                        <div class="col-xs-4 col-sm-4 text-right">
+                          <button (click)='agregarCarrito(product)' type="button" class="btn1" id="newquote"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 text-center">
+                          <button type="button" (click)='addWishList(product)' class="btn2" id="newquote"></button>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 text-left">
+                          <button type="button" (click)='viewDetails(product)' class="btn3" id="newquote"></button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="">
+                      <h4 class="titulo-salas2 text-center">
+                        {{product.pro_nombre}}
+                      </h4>
+                      <p class="precios text-center xs-hidden">
+                        <span *ngIf="!product.pro_estado_descuento"><br> ${{product.pro_precio}} </span>
+                        <span *ngIf="product.pro_estado_descuento" style="text-decoration: line-through;">
+                          Antes: ${{product.pro_precio}}
+                        </span>
+                        <br>
+                        <span *ngIf="!product.pro_estado_descuento">&nbsp;</span>
+                        <span *ngIf="product.pro_estado_descuento">
+                          <span style="color: red;">{{product.pro_discount_percentage}}% de descuento</span>
+                          <br>
+                          AHORA: ${{product.pro_precio-((product.pro_discount_percentage*product.pro_precio)/100)|number}}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</div>
+ 
+
+
+
+  <!--SECCION TEMPORADA"-->
+  <section class="section-container cursor" (click)="showAllProductComponent('all', '', 'pro_estado_temporada')">
+    <div class="text-right pannels800">
+      <img class="card-img-ofertas11 " src="../../assets/img/silla1.png" alt="ofertas y descuentos">
+    </div>
+  </section>
+  <!--#SECCION TEMPORADA"-->
+
+  <!--SECCION TIPS-->
+  <section style="background-color: rgb(235, 235, 235);" class="xs-hidden">
+    <div class="row row-w-100">
+      <div class="col-sm-12 text-center">
+        <img class="img-titles" src="../../assets/img/foto.svg" alt="">
+        <img class="img-titles-inferior" src="../../assets/img/como cuidar muebles.svg" alt="">
+      </div>
+    </div>
+
+    <div class="container-fostrap section-container">
+      <div class="content">
+        <div class="container">
+          <div class="row row-w-100">
+            <div class="col-xs-12 col-sm-6 col-md-4 text-center">
+              <div class="card">
+                <img src="../../assets/img/tips fondo1.svg" class="img-bg-grey" />
+                <div class="title-cards centrado" style="color:white !important">
+                  TIPS 1
+                </div>
+                <p class="align-justify centradoP tipsitos uppercase">
+                  Lorem ipsum dolor sit amet, con- sectetuer
+                  adipiscing elit, sed
+                  diam nonummy nibh euismod</p>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 text-center">
+              <div class="card">
+                <img src="../../assets/img/tips fondo2.svg" />
+                <div class="title-cards centrado" style="color: #606060 !important">
+                  TIPS 2
+                </div>
+                <p class="align-justify centradoP tipsitos uppercase" style="  color: #606060;">
+                  Lorem ipsum dolor sit
+                  amet, con- sectetuer adipiscing elit, sed
+                  diam nonummy nibh euismod</p>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 text-center">
+              <div class="card">
+                <img src="../../assets/img/tips fondo1.svg" />
+                <div class="title-cards centrado" style="color:white !important">TIPS 3</div>
+                <p class="align-justify centradoP tipsitos uppercase">Lorem ipsum dolor sit amet, con- sectetuer
+                  adipiscing elit, sed
+                  diam nonummy nibh euismod</p>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 text-center">
+              <div class="card">
+                <img src="../../assets/img/tips fondo2.svg" />
+                <div class="title-cards centrado" style="color:#606060 !important">TIPS 4</div>
+                <p class="align-justify centradoP tipsitos uppercase" style="color: #606060;">Lorem ipsum dolor sit
+                  amet, con- sectetuer adipiscing elit, sed
+                  diam nonummy nibh euismod</p>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 text-center">
+              <div class="card">
+                <img src="../../assets/img/tips fondo1.svg" />
+                <div class="title-cards centrado" style="color:white !important">TIPS 5</div>
+                <p class="align-justify centradoP tipsitos uppercase">Lorem ipsum dolor sit amet, con- sectetuer
+                  adipiscing elit, sed
+                  diam nonummy nibh euismod</p>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 text-center">
+              <div class="card">
+                <img src="../../assets/img/tips fondo2.svg" />
+                <div class="title-cards centrado" style="color: #606060 !important">TIPS 6</div>
+                <p class="align-justify centradoP tipsitos uppercase" style="  color: #606060;">Lorem ipsum dolor sit
+                  amet, con- sectetuer adipiscing elit, sed
+                  diam nonummy nibh euismod</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--#SECCION TIPS-->
+  <section style="background-color: #d3d3d3" id="quienesSomos" >
+    <div class="row row-w-100">
+      <div class="col-sm-12 text-center">
+        <img class="img-titles" src="../../assets/img/icino quienes somos.svg" alt="">
+        <img class="img-titles-inferior" src="../../assets/img/quienes somos.svg" alt="">
+      </div>
+    </div>
+    <div class="card-space-quienes-somos-texto card-background-space-quienes-somos-texto">
+      <div class="row">
+        <div class="col-sm-12"  >
+          <div class="text-center" >
+            <h1 class="text-center title-sh">SWEET HOME EC.</h1>
+            <h2 class="text-center sub-title-sh">ES MÁS QUE UNA TIENDA.</h2>
+            <br>
+          </div>
+        </div>
+      </div>
+      <div class="row text-justify" style="background-color: #ffffff;">
+        <div class="col-lg-6">
+          <p class="valores2">
+            Nuestro negocio se basa en mejorar el estilo de vida de las
+            personas. Ofrecemos una gran variedad de productos de
+            primera calidad que inspirarán a nuestros clientes a crear
+            la casa de sus sueños. Nos preocupamos por nuestros
+            clientes como por nuestras familias, y nos esforzamos por
+            proporcionar la mejor experiencia en cada paso del
+            camino.
+          </p>
+          <p class="valores2">
+            Nuestro equipo Sweet Home está para ti, te ayudará a
+            crear un lugar al que podrás llamar hogar y del cual no
+          </p>
+        </div>
+        <div class="col-lg-6">
+          <p class="valores2">
+            querrás salir. Decorar tus espacios será más fácil e
+            interesante de lo que crees, con nosotros recibirás
+            asesoramiento y encontrarás los productos que más te
+            gusten, al mejor precio y de calidad insuperable.
+          </p>
+          <p class="valores2">
+            Tu hogar necesita la pieza perfecta, aquella que completa
+            tu decoración y convierte a tu hogar parte de tu familia y
+            de tu comodidad. Encontrar esa pieza nunca había sido
+            tan fácil.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row row-w-100" id="identidadC">
+      <div class="col-sm-12 text-center">
+        <img class="img-titles" src="../../assets/img/icono identidad corporativa.svg" alt="">
+        <img class="img-titles-inferior" src="../../assets/img/identidad corporativa.svg" alt="">
+      </div>
+    </div>
+    <div class="card-space-quienes-somos-texto ">
+      <div class="col-md-6">
+        <div class="card row-identidad ">
+          <div class="text-center">
+            <img class="imgSectionsIcon12 text-center" src="../../assets/img/mision.svg" alt="calidad">
+          </div>
+          <br>
+          <div>
+            <h3 class="valores-title2 text-center">MISIÓN</h3>
+          </div>
+          <p class="valores11 text-justify">Todos nuestros productos son de calidad garantizada y están creados con
+            los materiales más finos, porque creemos que las cosas bellas que elijas para tu casa
+            hoy deben darte placer durante muchos años.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card row-identidad ">
+          <br>
+          <div class="text-center">
+            <img class="imgSectionsIcon12" src="../../assets/img/vision.svg" alt="calidad">
+          </div>
+          <br>
+          <div>
+            <h3 class="valores-title2 text-center">VISIÓN</h3>
+          </div>
+          <p class="valores11 text-justify">Convertirnos en una empresa que brinde productos para el hogar a nivel
+            nacional y que los clientes confíen en la calidad y la exclusividad que nuestros productos
+            les darán a sus espacios</p>
+        </div>
+      </div>
+      <br>
+      <br>
+    </div>
+    <div class="row row-w-100">
+      <div class="col-sm-12 text-center">
+        <img class="img-titles" src="../../assets/img/valores empresariales_icono.svg" alt="">
+        <img class="img-titles-inferior" src="../../assets/img/valores empresariales.svg" alt="">
+      </div>
+    </div>
+    <div class="container section-container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+          <div class="card card-valores">
+            <img class="img-valores" src="../../assets/img/calidad.svg" alt="calidad">
+            <h3 class="valores-title">CALIDAD</h3>
+            <p class="tipsitos2">
+              Todos nuestros
+              productos son de
+              calidad garantizada y están creados
+              con los materiales más finos, porque
+              creemos que las cosas bellas que
+              elijas para tu casa hoy deben darte
+              placer durante muchos años.
+            </p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+          <div class="card card-valores">
+            <img class="img-valores" src="../../assets/img/diseno.svg" alt="calidad">
+            <h3 class="valores-title">DISEÑO</h3>
+            <p class="tipsitos2">
+              Inspirándose en todo el espectro del
+              diseño, nuestros diseñadores
+              internos crean colecciones únicas
+              que te ayudarán a expresar tu estilo
+              personal y llevarlo a tu hogar.
+            </p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+          <div class="card card-valores">
+            <img class="img-valores" src="../../assets/img/transformacion.svg" alt="calidad">
+            <h3 class="valores-title">TRANSFORMACIÓN</h3>
+            <p class="tipsitos2">
+              Somos capaces de transformar tus
+              espacios. Con nuestra ayuda tu
+              hogar se convertirá en un lugar
+              especial y único.
+            </p>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+          <div class="card card-valores">
+            <img class="img-valores" src="../../assets/img/calidad.svg" alt="calidad">
+            <h3 class="valores-title">CONFIANZA</h3>
+            <p class="tipsitos2">
+              Nuestro servicio es especial y te
+              asesoraremos de la mejor manera
+              para que tu decoración sea la ideal y
+              puedas crear los ambientes
+              perfectos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--SECCION CONTACTANOS-->
+  <section class="content-section" style="background-color: rgb(255, 255, 255);" id="contactos">
+    <div class="row no-margin-row">
+      <div class="col-sm-12">
+        <div class="space-t3 ">
+          <div class="container contacto-footer "
+            style="background-color: #e2e2e2;width:60%; border-bottom-right-radius: 80px;">
+            <p class="h4 mb-4 text-center ">
+              <img data-aos="flip-left" data-aos-duration="3000" class="imgContactos mt-4"
+                src="../../assets/img/contactos_texto.svg" alt="consejos">
+            </p>
+            <form #messajeForm="ngForm" novalidate
+              (ngSubmit)="onSaveMessage(messajeForm.value, messajeForm.valid, messajeForm)">
+              <div class="row formularioGeneral">
+                <div class="col-sm-12 text-left col-contact" style="margin-top: 2rem;">
+                  <div class="content content-form">
+                    <div class="form-group" style="margin-bottom: 15px;">
+                      <input type="text" name="message_name" required placeholder="Nombres"
+                        class="form-control valores2 formulario input-contact" [(ngModel)]="message.message_name"
+                        required #message_name="ngModel">
+                      <small [hidden]="message_name.valid || (message_name.pristine && !messajeForm.submitted)"
+                        class="text-danger">
+                        Ingrese el nombre
+                      </small>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 15px;">
+                      <!-- <select class="form-control valores2" name="message_city" id="message_city"
+                        [(ngModel)]="message.message_city" #message_city='ngModel' required>
+                        <option value="" selected="" disabled="">CIUDAD</option>
+                        <option value="Cuenca">Cuenca</option>
+                        <option value="Guayaquil">Guayaquil</option>
+                      </select> -->
+                      <input type="text" name="message_city" required placeholder="Ciudad" id="message_city"
+                        class="form-control valores2 formulario input-contact" [(ngModel)]="message.message_city"
+                        required #message_city="ngModel">
+                      <small [hidden]="message_city.valid || (message_city.pristine && !messajeForm.submitted)"
+                        class="text-danger">
+                        Seleccione una ciudad
+                      </small>
+                    </div>
+
+
+                    <div class="form-group" style="margin-bottom: 15px;">
+                      <input type="text" name="message_email" required placeholder="Email"
+                        class="formulario form-control valores2 input-contact" [(ngModel)]="message.message_email"
+                        required #message_email="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$">
+                      <small [hidden]="message_email.valid || (message_email.pristine && !messajeForm.submitted)"
+                        class="text-danger">
+                        Ingrese Email
+                      </small>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 15px;">
+                      <input type="text" name="message_phone" placeholder="Teléfono"
+                        class="formulario form-control valores2 input-contact" [(ngModel)]="message.message_phone"
+                        required #message_phone="ngModel" pattern="">
+                      <small [hidden]="message_phone.valid || (message_phone.pristine && !messajeForm.submitted)"
+                        class="text-danger">
+                        Ingrese el teléfono
+                      </small>
+                    </div>
+                    <div class="form-group">
+                      <textarea name="message_description" rows="5" cols="50" placeholder="Mensaje"
+                        class="formularioMensaje form-control valores2 input-contact"
+                        [(ngModel)]="message.message_description" required #message_description="ngModel"></textarea>
+                      <small
+                        [hidden]="message_description.valid || (message_description.pristine && !messajeForm.submitted)"
+                        class="text-danger">
+                        Ingrese el mensaje
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row" style="margin-top: 3%; margin-bottom: 20%;">
+                <div class="form-group col-sm-6">
+                  <button class="btn  btn-OK btn-block titulo-salas2" type="submit">ENVIAR</button>
+                </div>
+                <div class="form-group col-sm-6">
+                  <button class="btn btn-cancelar btn-block titulo-salas2" type="submit">CANCELAR</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="space-t2">
+        <br>
+      </div>
+    </div>
+  </section>
+  <!--#SECCION CONTACTANOS-->
+
+  <!--SECCION HORARIO DE ATENCION-->
+  <section class="content-section">
+    <div class="space-t3">
+      <div style="background-color: #e2e2e2;">
+        <div class="content-section mt-3" id="serviciosSection">
+          <div class="container text-center">
+            <div class="row no-margin-row display-center-row">
+              <div class="col-sm-12 display-center ">
+                <img data-aos="flip-left" data-aos-duration="3000" class="imgSectionsServicios"
+                  src="../../assets/img/horario icono.svg" alt="horario" width="80px">
+              </div>
+            </div>
+            <div class="row no-margin-row display-center-row">
+              <div class="col-sm-12 display-center">
+                <img data-aos="flip-left" data-aos-duration="3000" class="servicios mt-5"
+                  src="../../assets/img/horario de atencion.svg" alt="consejos" width="240px">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container text-center " style="min-width: 20% !important;">
+          <div class=" text-center">
+            <div class="col-lg-6">
+              <h1 class="text-center opc2">CUENCA</h1>
+              <p class="valores35">Lunes a viernes: 9:30 am a 19:00 pm <br>Sábado: 10:00 am a 16:00 pm </p>
+            </div>
+            <div class="col-lg-6" style="border-left: solid  #606060 2.5px ;">
+              <h1 class="text-center opc2">GUAYAQUIL</h1>
+              <p class="valores35">Lunes a viernes: 10:00 am a 19:00 pm <br>Sábado: 10:00 am a 16:00 pm</p>
+            </div>
+          </div>
+          <br>
+          <br>
+          <br>
+          <br>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-container>
+
+<!-- </div> -->
+<footer>
+  <!--#HORARIOS DE ATENCION-->
+  <div class="conteiner1 text-center " style="min-width: 20% !important; ">
+    <br>
+    <br>
+    <br>
+    <div class="row text-center no-margin-row" style="width: 100%; height:auto">
+      <div class="col-sm-4 conteiner1">
+        <div style="padding: 30px;">
+          <h1 class="valores-title" style="color: white !important;">QUIÉNES SOMOS?</h1>
+          <p class="valores11 text-justify" style="border-bottom: solid white 2.5px ;margin-bottom:3%;">
+            Nuestro negocio
+            se
+            basa en mejorar el
+            estilo de vida de las personas. Ofrecemos
+            una gran variedad de productos de
+            primera calidad que inspirarán a nuestros
+            clientes a crear la casa de sus sueños.
+            Nos preocupamos por nuestros clientes
+            como por nuestras familias, y nos
+            esforzamos por proporcionar la mejor
+            experiencia en cada paso del camino.
+            <br>
+          </p>
+          <p (click)="viewRouter('#identidadC',1200)" class="valores12 text-left cursor"
+            style="border-bottom: solid white 2.5px ;margin-bottom:3%;">
+            IDENTIDAD COORPORATIVA
+            <br>
+          </p>
+          <p (click)="viewRouter('#valoresEmpresariales',1200)" class="valores12 text-left cursor"
+            style="margin-bottom:3%;">
+            VALORES EMPRESARIALES
+            <br>
+          </p>
+        </div>
+
+      </div>
+      <div class="col-sm-4 conteiner1 text-center ">
+        <div style="padding: 40px;">
+          <div>
+            <h1 (click)="showAllProductComponent('Salas', '', 'all')" class="text-center valores-title cursor"
+              style="border-bottom: solid white 1.5px ; color: white !important; ">
+              SALAS
+            </h1>
+          </div>
+          <div>
+            <h1 (click)="showAllProductComponent('Comedores', 'all', 'all')" class="text-center valores-title cursor"
+              style="border-bottom: solid white 1.5px ; color: white !important; ">
+              COMEDORES
+            </h1>
+          </div>
+          <div>
+            <h1 (click)="showAllProductComponent('Dormitorios', '', 'all')" class="text-center valores-title cursor"
+              style="border-bottom: solid white 1.5px ; color: white !important; ">
+              DORMITORIOS
+            </h1>
+          </div>
+          <div>
+            <h1 (click)="showAllProductComponent('Decoración', '', 'all')" class="text-center valores-title cursor"
+              style="border-bottom: solid white 1.5px ; color: white !important; ">
+              DECORACIÓN</h1>
+          </div>
+          <div>
+            <h1 (click)="showAllProductComponent('Escritorios', '', 'all')" class="text-center valores-title cursor"
+              style="border-bottom: solid white 1.5px ; color: white !important; ">
+              ESCRITORIOS</h1>
+          </div>
+          <div>
+            <h1 (click)="showAllProductComponent('Exteriores', '', 'all')" class="text-center valores-title cursor"
+              style="border-bottom: solid white 1.5px ; color: white !important; ">
+              EXTERIORES</h1>
+          </div>
+          <div>
+            <h1 (click)="showAllProductComponent('Alfombras', '', 'all')" class="text-center valores-title cursor"
+              style="border-bottom: solid white 1.5px ; color: white !important; ">
+              ALFOMBRAS</h1>
+          </div>
+          <div>
+            <h1 (click)="showAllProductComponent('Iluminación', '', 'all')" class="text-center valores-title cursor"
+              style="border-bottom: solid white 1.5px ; color: white !important;">
+              ILUMINACIÓN</h1>
+          </div>
+          <div>
+            <h1 (click)="showAllProductComponent('Bar', '', 'all')" class="text-center valores-title cursor"
+              style="border-bottom: solid white 1.5px ; color: white !important;">
+              BAR
+            </h1>
+          </div>
+          <div>
+            <h1 (click)="showAllProductComponent('Niños', '', 'all')" class="text-center valores-title cursor"
+              style="border-bottom: solid white 1.5px ; color: white !important;">
+              NIÑOS</h1>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-sm-4">
+        <div class="row  no-margin-row">
+          <div class="col-sm-12">
+            <div style="padding-top: 40px;">
+              <div class="row no-margin-row">
+                <div class="col-sm-2 img-responsive display-center">
+                  <img class="socialnetf2 img-responsive" data-aos="flip-left" data-aos-duration="3000"
+                    style="width:60px; padding-top: 15px;" src="../../assets/img/ubicacion.svg" alt="consejos">
+                </div>
+                <div class="col-sm-10 text-justify text-center">
+                  <p class="valores11 text-justify "> Cuenca - Av. Héroes de Verdeloma 8-21 y
+                    Luis Cordero</p>
+                </div>
+              </div>
+              <div class="row no-margin-row">
+                <div class="col-sm-2 img-responsive display-center">
+                  <img class="socialnetf2 img-responsive" data-aos="flip-left" data-aos-duration="3000"
+                    style="width:60px; padding-top: 15px;" src="../../assets/img/ubicacion.svg" alt="consejos">
+                </div>
+                <div class="col-sm-10 text-justify text-center">
+                  <p class="valores11 text-justify "> Guayaquil - Urdesa Central, Circunvalación Sur 512 Las
+                    Monjas y Ébanos</p>
+                </div>
+              </div>
+              <br><br>
+              <div class="row no-margin-row">
+                <div class="col-sm-2 img-responsive display-center">
+                  <a class="cursor" target="_blanck"
+                    href="https://api.whatsapp.com/send?phone=593997944069&text=Saludos,%20deseo%20contactarme%20con%20Sweet Home Ecuador">
+                    <img class="img-responsive socialnetf2" data-aos="flip-left" data-aos-duration="3000"
+                      style="width:60px;padding-top: 11px;" src="../../assets/img/WPP-blanco.svg" alt="consejos">
+                  </a>
+                </div>
+                <div class="col-sm-10 text-justify text-center">
+                  <p class="valores11 text-center ">099 7944 069 - 098 7752 441</p>
+                </div>
+              </div>
+
+              <!-- <div class="col-sm-2 img-responsive display-center" style="min-height: 130px;">
+                <img class="socialnetf2 img-responsive" data-aos="flip-left" data-aos-duration="1500" style="width:60px"
+                  src="../../assets/img/ubicacion.svg" alt="consejos">
+
+              </div>
+              <div class="col-sm-9 text-justify text-center">
+                <p class="valores11 text-justify">Cuenca - Av. Héroes de Verdeloma 8-21 y Luis Cordero
+                  Guayaquil - Urdesa Central, Circunvalación Sur 512 Las
+                  Monjas y Ébanos</p>
+              </div> -->
+            </div>
+          </div>
+
+        </div>
+        <!-- <br>
+        <div class="row no-margin-row">
+          <div style="padding-top: 40px;">
+            <div class="col-sm-2 display-center" style="min-height: 50px;">
+              <a class="cursor" target="_blanck"
+                href="https://api.whatsapp.com/send?phone=593997944069&text=Saludos,%20deseo%20contactarme%20con%20Sweet Home Ecuador">
+
+                <img class="img-responsive socialnetf2" data-aos="flip-left" data-aos-duration="1500" style="width:60px"
+                  src="../../assets/img/WPP-blanco.svg" alt="consejos">
+              </a>
+
+            </div>
+            <div class="col-sm-9 text-justify text-center display-center ">
+              <p class="valores11 text-justify">099 794 4069 - 098 775 2441</p>
+            </div>
+          </div>
+
+        </div> -->
+        <br>
+        <div class="row no-margin-row">
+          <div class="col-sm-12 text-center iconsSocial ">
+            <br>
+            <br>
+
+            <a class="icon a-social" href="https://www.facebook.com/sweethomeecuador/" target="_blank"><img
+                class="socialnetf" data-aos="fade-down" data-aos-duration="1500"
+                onmouseover="this.src='../../assets/img/face_amarillo.svg'"
+                onmouseout="this.src='../../assets/img/FACE-blanco.svg'" src="../../assets/img/FACE-blanco.svg"
+                alt="Facebook"></a>
+
+
+
+            <!-- <a class=" icon a-social" href="" target="_blank"><img class="socialnet" data-aos="fade-down"
+                data-aos-duration="1500" onmouseover="this.src='../../assets/img/twitter_amarillo.svg'"
+                onmouseout="this.src='../../assets/img/TWITTER-blanco.svg'" src="../../assets/img/TWITTER-blanco.svg"
+                alt="Twitter"></a> -->
+
+
+            <a class=" icon a-social" href="https://instagram.com/sweethomeec?igshid=1imuysil2be2v" target="_blank"><img
+                class="socialnet" data-aos="fade-down" data-aos-duration="1500"
+                onmouseover="this.src='../../assets/img/insta_amarillo.svg'"
+                onmouseout="this.src='../../assets/img/INSTAGRAM-blanco.svg'"
+                src="../../assets/img/INSTAGRAM-blanco.svg" alt="Instagram"></a>
+
+
+            <a class="icon a-social"
+              href="https://api.whatsapp.com/send?phone=593997944069&text=Saludos,%20deseo%20contactarme%20con%20Sweet Home Ecuador"
+              target="_blank"><img class="socialnet" data-aos="fade-down" data-aos-duration="1500"
+                onmouseover="this.src='../../assets/img/wpp_amarillo.svg'"
+                onmouseout="this.src='../../assets/img/WPP-blanco.svg'" src="../../assets/img/WPP-blanco.svg"
+                alt="Whatsapp"></a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+  </div>
+
+  <div class="row justify-content-center line-bg-gradient-contact"
+    style="max-width: 100%; margin: 0 auto; background-color:#ffc009;">
+    <div class="col-sm-12 col-contact text-center">
+      <br>
+      <div class=" valores-title text-footer" style="color: white !important;">Powered By</div>
+      <a href="https://nikolasoft.com" target="_blank" class="a-redes-sociales">
+        <img socialnetsrc="../../assets/img/LogoNikolaSoft-03.svg" class="text-footer logo-nikola" alt="instagram">
+      </a>
+      <br>
+      <br>
+    </div>
+  </div>
+</footer>
+
+<app-modal-login></app-modal-login>
+<app-modal-details *ngIf="product!={}" [product]='product'></app-modal-details>

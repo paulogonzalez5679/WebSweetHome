@@ -1,0 +1,57 @@
+<nav id="init" #navbar class="navbar navbar-primary bg-gradient" style="z-index: 2 !important;">
+  <div class="container">
+    <div class="navbar-header" style="min-width: 100%;">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar"
+        (click)="sidebarToggle()">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" style="margin: 0 auto !important;">
+      <!-- {{arrayCategory|json}} -->
+      <ul class="nav navbar-nav navbar-right text-center" style="margin: 0 auto !important;">
+        
+        <li (mouseenter)="test($event,i)" id="menuCategory{{i}}"  class="cursor" *ngFor="let categoria of arrayCategory; let i = index">
+      
+          <a  id="navbarDropdown{{i}}" *ngIf="arraySubCategory[i] && (categoria.category_state!=false || categoria.category_state==undefined) " (click)="indexComponent.showAllProductComponent(categoria.nombre, '', 'all',i)"
+            class="dropdown-toggle menu opcMenu text-center" type="button" data-toggle="dropdown">
+            {{categoria.nombre | uppercase}}
+            <span *ngIf="arraySubCategory[i].length!=0" class="caret md-hidden py-4" style="margin: 0 auto;"></span>
+          </a>
+      
+          <ng-container *ngIf="arraySubCategory[i]">
+            <ul *ngIf="arraySubCategory[i].length!=0" class="dropdown-menu dropdown-menu-left" role="menu">
+              <div class="row {{categoria.nombre=='Salas'?'row-w-300':'row-w-100'}} md-hidden" *ngIf="arraySubCategory[i]">
+                <div class="col-sm-12 col-md-6 col-lg-6 col-sub-menu">
+                  <li
+                    (click)="indexComponent.showAllProductbySubcategory(categoria.nombre, subcategoria.subcat_nombre, 'all')"
+                    *ngFor="let subcategoria of arraySubCategory[i];">
+                    {{subcategoria.subcat_nombre | uppercase}}
+                    <hr class="text-center"
+                      style="border-top: solid #e6e3e3 2px; width: 100%; margin-bottom: 2px; margin-top: 3px;">
+                  </li>
+                </div>
+                <div *ngIf="categoria.nombre=='Salas'" class="col-sm-12 col-md-6 col-lg-6" style="padding: 0px !important; display: block">
+                  <div style="margin: 0;">
+                    <img src="{{categoria.img_category}}" style="width:300px" alt="consejos">
+                  </div>
+                  <div style="border-left: solid #606060  1px;">
+                    <div class=" text-center">
+                      <p class="valores19 text-center">{{categoria.descrip_category |uppercase}}</p>
+                    </div>
+                    <div class="b-logo2 text-center" style="min-width: 100%;">
+                      <img src="../../assets/img/logo_inicio.svg">
+                      <br>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ul>
+          </ng-container>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

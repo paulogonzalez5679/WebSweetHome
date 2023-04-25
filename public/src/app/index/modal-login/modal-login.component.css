@@ -1,0 +1,42 @@
+.fas {
+  color: #ffc009;
+}
+.fa-user {
+  color: white;
+}
+.login {
+  color: #1d1d1b;
+}
+.login:hover {
+  color: #ffc009;
+}   
+.btn-ingresar:hover {
+  background-color: #ffc009;
+}
+.ico-user {
+  font-size: 50px;
+}
+.badge-header {
+  background-color:  #c1c1c1;
+  padding: 10px;
+  margin: 0 auto;
+  /* width: 100px;
+  height: 100px; */
+
+}
+.title-login {
+  color:  #ffc009;
+  font-weight: bold;
+  font-size: 18px;
+
+}
+
+.display-column-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form-content{
+  min-width: 300px;
+}

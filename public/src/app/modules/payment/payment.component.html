@@ -1,0 +1,254 @@
+<div class="modal fade" #modalPayment id="modalPayment" tabindex="-1" role="dialog"
+  aria-labelledby="modalCategoryLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-header card-header-info text-center">
+            <h2 class="card-title">Finalizar Compra</h2>
+            <span class="span-price">${{precioTotal}}</span>
+          </div>
+          <hr>
+          <div class="card-body">
+            <!-- <form #formPayment="ngForm" action="" class="form-horizontal"
+              (ngSubmit)='paymentInit(formPayment.value, formPayment.valid)' novalidate action="/" method="get">
+              <div class="row row-w-80">
+                <div class="col-sm-12">
+                  <small class="text-danger">*</small> Dirección de entrega
+                  <input type="text" class="form-control" name="payment_address" id="payment_address"
+                    placeholder="Dirección de entrega" [(ngModel)]="payment.payment_address" #payment_address="ngModel"
+                    required pattern="">
+                  <small [hidden]="payment_address.valid || (payment_address.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio
+                  </small>
+                </div>
+              </div>
+              <div class="row row-w-80">
+                <div class="col-sm-6">
+                  <small class="text-danger">*</small> Identificación
+                  <input type="text" class="form-control" name="payment_identification" id="payment_identification"
+                    placeholder="Identificación" [(ngModel)]="payment.payment_identification"
+                    #payment_identification="ngModel" required pattern="" (keypress)="numberOnly($event)">
+                  <small
+                    [hidden]="payment_identification.valid || (payment_identification.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio</small>
+                </div>
+                <div class="col-sm-6">
+                  <small class="text-danger">*</small> Nombre del titular
+                  <input type="text" class="form-control" name="payment_name" id="payment_name"
+                    placeholder="Nombre del titular" [(ngModel)]="payment.payment_name" #payment_name="ngModel" required
+                    pattern="">
+                  <small [hidden]="payment_name.valid || (payment_name.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio
+                  </small>
+                </div>
+              </div>
+              <div class="row row-w-80">
+                <div class="col-sm-6">
+                  <small class="text-danger">*</small> Teléfono
+                  <input type="text" class="form-control" name="payment_phone" id="payment_phone" placeholder="Teléfono"
+                    [(ngModel)]="payment.payment_phone" #payment_phone="ngModel" required pattern="" maxlength="13"
+                    (keypress)="numberOnly($event)">
+                  <small [hidden]="payment_phone.valid || (payment_phone.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio</small>
+                </div>
+                <div class="col-sm-6">
+                  <small class="text-danger">*</small> Email
+                  <input type="text" class="form-control" name="payment_email" id="payment_email" placeholder="Email"
+                    [(ngModel)]="payment.payment_email" #payment_email="ngModel" required pattern="">
+                  <small [hidden]="payment_email.valid || (payment_email.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio</small>
+                </div>
+              </div>
+              <div class="row row-w-80">
+                <div class="col-sm-6">
+                  <small class="text-danger">*</small> Número de tarjeta
+                  <input type="text" class="form-control" name="payment_number_card" id="payment_number_card"
+                    placeholder="Número de tarjeta" [(ngModel)]="payment.payment_number_card"
+                    #payment_number_card="ngModel" required pattern="" maxlength="19" (keypress)="numberOnly($event)"
+                    (keyup)="masksecuencial($event)">
+                  <small
+                    [hidden]="payment_number_card.valid || (payment_number_card.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio</small>
+                </div>
+                <div class="col-sm-3">
+                  <small class="text-danger">*</small> Mes
+                  <select class="form-control" name="payment_month" id="payment_month"
+                    [(ngModel)]="payment.payment_month" #payment_month="ngModel">
+                    <option value="">Seleccione</option>
+                    <option value="{{item.nummonth}}" *ngFor="let item of months">{{item.nummonth}}</option>
+                  </select>
+                  <small [hidden]="payment_month.valid || (payment_month.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio
+                  </small>
+                </div>
+                <div class="col-sm-3">
+                  <small class="text-danger">*</small> Año
+                  <select class="form-control" name="payment_year" id="payment_year" [(ngModel)]="payment.payment_year"
+                    #payment_year="ngModel">
+                    <option value="">Seleccione</option>
+                    <option value="{{item.year}}" *ngFor="let item of years">{{item.year}}</option>
+                  </select>
+                  <small [hidden]="payment_year.valid || (payment_year.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio
+                  </small>
+                </div>
+              </div>
+              <div class="row row-w-80">
+                <div class="col-sm-6">
+                  <small class="text-danger">*</small> Código de seguridad
+                  <input type="text" class="form-control" name="payment_cvv" id="payment_cvv" placeholder="Cvv"
+                    [(ngModel)]="payment.payment_cvv" #payment_cvv="ngModel" required pattern="" maxlength="3"
+                    (keypress)="numberOnly($event)">
+                  <small [hidden]="payment_cvv.valid || (payment_cvv.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio
+                  </small>
+                </div>
+                <div class="col-sm-6 text-right"><br>
+                  <button class="btn btn-info btn-fill btn-block">
+                    Finalizar
+                  </button>
+                </div>
+              </div>
+            </form> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" #modalPaymentSendNotify id="modalPaymentSendNotify" tabindex="-1" role="dialog"
+  aria-labelledby="modalCategoryLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-header card-header-info text-center">
+            <h2 class="card-title">Finalizar Compra </h2>
+            <span class="span-price">${{precioTotal}}</span>
+          </div>
+          <hr>
+          <div class="card-body text-center">
+            <span class="fa fa-info-circle"></span>
+            <h3>Estimad@ {{indexComponent.infoUser.user_name}} se generará una orden de compra y se enviará al administrador</h3>
+            <br>
+            <form #formPayment="ngForm" action="" class="form-horizontal"
+              (ngSubmit)='sendEmailNewOrden(formPayment.value, formPayment.valid)' novalidate action="/" method="get">
+              
+              <div class="row row-w-80">
+                <div class="col-sm-6">
+                  <small class="text-danger">*</small> Identificación
+                  <input type="text" class="form-control" name="payment_identification" id="payment_identification"
+                    placeholder="Número de cédula/Pasaporte" [(ngModel)]="payment.payment_identification"
+                    #payment_identification="ngModel" required pattern="" (keypress)="numberOnly($event)">
+                  <small
+                    [hidden]="payment_identification.valid || (payment_identification.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio</small>
+                </div>
+                <div class="col-sm-6">
+                  <small class="text-danger">*</small> Nombre
+                  <input type="text" class="form-control" name="payment_name" id="payment_name"
+                    placeholder="Nombre del titular" [(ngModel)]="payment.payment_name" #payment_name="ngModel" required
+                    pattern="">
+                  <small [hidden]="payment_name.valid || (payment_name.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio
+                  </small>
+                </div>
+              </div>
+              <div class="row row-w-80">
+                <div class="col-sm-6">
+                  <small class="text-danger">*</small> Teléfono
+                  <input type="text" class="form-control" name="payment_phone" id="payment_phone" placeholder="Teléfono"
+                    [(ngModel)]="payment.payment_phone" #payment_phone="ngModel" required pattern="" maxlength="13"
+                    (keypress)="numberOnly($event)">
+                  <small [hidden]="payment_phone.valid || (payment_phone.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio</small>
+                </div>
+                <div class="col-sm-6">
+                  <small class="text-danger">*</small> Email
+                  <input type="text" class="form-control" name="payment_email" id="payment_email" placeholder="Email"
+                    [(ngModel)]="payment.payment_email" #payment_email="ngModel" required pattern="">
+                  <small [hidden]="payment_email.valid || (payment_email.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio</small>
+                </div>
+              </div>
+              <div class="row row-w-80">
+                <div class="col-sm-6">
+                  <small class="text-danger">*</small>Ciudad
+                  <input type="text" class="form-control" name="payment_city" id="payment_city" placeholder="Ingrese la ciudad"
+                    [(ngModel)]="payment.payment_city" #payment_city="ngModel" required pattern="">
+                  <small [hidden]="payment_city.valid || (payment_city.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio</small>
+                </div>
+                <!-- <div class="col-sm-6">
+                  <small class="text-danger">*</small> Seleccione la Ciudad
+                  <select  class="form-control" name="payment_city" id="payment_city" placeholder="Selecione la ciudad" 
+                  [(ngModel)]="payment.payment_city" #payment_city="ngModel"
+                  required>
+                    <option value="Selecione la ciudad">Selecione la ciudad</option>
+                    <option value="Cuenca">Cuenca</option>
+                    <option value="Guayaquil">Guayaquil</option>
+                  </select>
+                  <small [hidden]="payment_city.valid || (payment_city.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio
+                  </small>
+                </div> -->
+                <div class="col-sm-6">
+                  <small class="text-danger">*</small> Dirección de entrega
+                  <input type="text" class="form-control" name="payment_address" id="payment_address"
+                    placeholder="Dirección de entrega" [(ngModel)]="payment.payment_address" #payment_address="ngModel"
+                    required pattern="">
+                  <small [hidden]="payment_address.valid || (payment_address.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio
+                  </small>
+                </div>
+              </div>
+              <div class="row row-w-80">
+                <div class="col-sm-6">
+                </div>
+                <div class="col-sm-6">
+                  <small class="text-danger">*</small> Referencia de la dirección
+                  <input type="text" class="form-control" name="payment_reference" id="payment_reference"
+                    placeholder="Referencia de entrega" [(ngModel)]="payment.payment_reference" #payment_reference="ngModel"
+                    required pattern="">
+                  <small [hidden]="payment_reference.valid || (payment_reference.pristine && !formPayment.submitted)"
+                    class="text-danger">
+                    Obligatorio
+                  </small>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <button type="submit" class="btn btn-info btn-fill btn-block">
+                    Continuar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+       
+      </div>
+    </div>
+  </div>
+</div>

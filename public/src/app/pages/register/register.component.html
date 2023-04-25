@@ -1,0 +1,148 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0Q46MZES1C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  //gtag('config', 'G-0Q46MZES1C');
+</script>
+
+
+<body class="body">
+    <div class="login-page">
+        <a href="/index">
+            <img style="width: 30%; margin-left: 3rem; padding-top: 3rem" src="../../assets/img/logo_inicio.svg">
+        </a>
+        <div style="margin-top: 5rem;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-md-offset-3 col-sm-offset-3">
+                        <form method="#" action="#">
+                            <div class="card card-hidden">
+                                <div class="header text-center">Registro</div>
+                                <form #registerForm="ngForm" novalidate
+                                    (ngSubmit)="onRegister(registerForm.value, registerForm.valid)">
+                                    <div class="content">
+                                        <div class="form-group">
+                                            <input type="text" name="user_name" id="user_name" required
+                                                placeholder="Nombre" class="form-control"
+                                                [(ngModel)]="userRegister.user_name" required #user_name="ngModel">
+                                            <small
+                                                [hidden]="user_name.valid || (user_name.pristine && !registerForm.submitted)"
+                                                class="text-danger">
+                                                Ingrese su nombre
+                                            </small>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" name="user_lastname" required placeholder="Apellido"
+                                                class="form-control" [(ngModel)]="userRegister.user_lastname" required
+                                                #user_lastname="ngModel">
+                                            <small
+                                                [hidden]="user_lastname.valid || (user_lastname.pristine && !registerForm.submitted)"
+                                                class="text-danger">
+                                                Ingrese su apellido
+                                            </small>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="user_cell_phone" required
+                                                placeholder="Celular/Telefono" class="form-control"
+                                                [(ngModel)]="userRegister.user_cell_phone" required
+                                                #user_cell_phone="ngModel">
+                                            <small
+                                                [hidden]="user_cell_phone.valid || (user_cell_phone.pristine && !registerForm.submitted)"
+                                                class="text-danger">
+                                                Ingrese su Ciudad
+                                            </small>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" name="user_city" required placeholder="Ciudad"
+                                                class="form-control" [(ngModel)]="userRegister.user_city" required
+                                                #user_city="ngModel">
+                                            <small
+                                                [hidden]="user_city.valid || (user_city.pristine && !registerForm.submitted)"
+                                                class="text-danger">
+                                                Ingrese su Ciudad
+                                            </small>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="email" name="user_email" placeholder="Email"
+                                                class="form-control" [(ngModel)]="userRegister.user_email" required
+                                                #user_email="ngModel"
+                                                pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$">
+                                            <small
+                                                [hidden]="user_email.valid || (user_email.pristine && !registerForm.submitted)"
+                                                class="text-danger">
+                                                Email inválido.
+                                            </small>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" type="password" name="user_password"
+                                                placeholder="Contraseña" class="form-control"
+                                                [(ngModel)]="userRegister.user_password" required minlength="6"
+                                                #user_password="ngModel">
+                                            <small
+                                                [hidden]="user_password.valid || (user_password.pristine && !registerForm.submitted)"
+                                                class="text-danger">
+                                                Contraseña muy corta (6 caracteres mínimo)
+                                            </small>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" type="password" name="user_confirPassword"
+                                                placeholder="Confirmar Contraseña" class="form-control"
+                                                [(ngModel)]="userRegister.user_confirPassword" required minlength="6"
+                                                #user_confirPassword="ngModel">
+                                            <small
+                                                [hidden]="user_confirPassword.valid || (user_confirPassword.pristine && !registerForm.submitted)"
+                                                class="text-danger">
+                                                Las contraseñas con coinciden
+                                            </small>
+                                        </div>
+
+                                    </div>
+                                    <div class="footer text-center">
+                                        <button type="submit"
+                                            class="btn btn-fill btn-registrar btn-wd">Registrar</button>
+                                    </div>
+                                    <style>
+                                        .btn-registrar:hover {
+                                            background-color: #ffc009;
+                                        }
+                                    </style>
+
+                                </form>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer footer-transparent">
+            <div class="container">
+                <nav class="pull-left">
+                    <ul>
+                        <li>
+
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </footer>
+        <footer class="footer footer-transparent">
+
+        </footer>
+    </div>
+
+
+</body>
+
+
+<style>
+    .body {
+        background-color: #ffc009;
+    }
+</style>

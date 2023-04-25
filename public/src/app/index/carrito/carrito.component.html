@@ -1,0 +1,84 @@
+<div class="row-w-70" style="padding-top: 70px;">
+    <div class="row">
+        <div class="col-sm-12 text-right">
+            <button (click)='initPayment()' class="btn btn-danger btn-sm">
+                <i class="fa fa-credit-card"></i> Pagar
+            </button>
+        </div>
+    </div>
+    <hr>
+    <table id="cart" class="table table-hover table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th class="text-center">Eliminar</th>
+                <th class="text-center">Imágen</th>
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Precio</th>
+                <th class="text-center">Cantidad</th>
+                <th class="text-center">Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of arrayProductCart; let i = index">
+                <td class="text-center">
+                    <button (click)='deleteProductCart(i)' class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i>
+                    </button>
+                </td>
+                <td style="width: 20%; padding: 10px !important" class="text-center">
+                    <img src="{{p.pro_url}}" alt="..." class="img-responsive" />
+                </td>
+                <td class="text-center">{{p.pro_nombre}}</td>
+                <td *ngIf="p.pro_estado_descuento" class="">
+                    ${{p.pro_precio-((p.pro_discount_percentage*p.pro_precio)/100)}}</td>
+                <td *ngIf="!p.pro_estado_descuento" class="">
+                    ${{p.pro_precio}}
+                </td>
+                <td class="text-center">
+                    <div class="row row-w-80">
+                        <div class="col-sm-12">
+                            <input [(ngModel)]='p.pro_pro_cantidadCarrito' name='pro_pro_cantidadCarrito'
+                                id="pro_pro_cantidadCarrito" #pro_pro_cantidadCarrito='ngModel' type="number"
+                                class="form-control text-center" min="1" id="valor" onkeypress="valorcero(p)"
+                                (ngModelChange)="onChangeCantidad($event)">
+                        </div>
+                    </div>
+                </td>
+                <td *ngIf="p.pro_estado_descuento" class="text-right">
+                    ${{(p.pro_precio-((p.pro_discount_percentage*p.pro_precio)/100))*p.pro_pro_cantidadCarrito}}</td>
+                <td *ngIf="!p.pro_estado_descuento" class="text-right">${{p.pro_precio*p.pro_pro_cantidadCarrito}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="text-center" rowspan="3" colspan="4">
+                    <button (click)="setState()" type="button" class="btn btn-success btn-fill">
+                        Seguir comprando
+                    </button>
+                </td>
+                <td class="text-right">
+                    <b>SUBTOTAL</b>
+                </td>
+                <td class="text-right">
+                    ${{precioTotal}}
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right">
+                    <b>IVA 12%</b>
+                </td>
+                <td class="text-right">
+                    ${{(precioTotal*0.12).toFixed(2)}}
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right">
+                    <b>TOTAL</b>
+                </td>
+                <td class="text-right">
+                    <span class="text-subtotal">${{(precioTotal*0.12)+precioTotal}}</span>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<app-payment [precioTotal]='(precioTotal*0.12)+precioTotal'></app-payment>

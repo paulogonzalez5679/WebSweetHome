@@ -1,0 +1,87 @@
+.bg-gradient {
+  background-color: #606060;
+}
+.off-canvas-sidebar .navbar-collapse {
+  background-color: transparent !important;
+}
+.navbar {
+  margin-bottom: 0px !important;
+  
+}
+.cursor {
+  cursor: pointer;
+}
+.menu {
+  color: #fff;
+  font-family: "Univers LT Std";
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+  font-size: 14px;}
+.opcMenu:hover {
+  color: #ffc009;
+}
+.dropdown-menu {
+  /* min-width:220px; */
+  margin-right: 0;
+  border-radius: 0 !important;
+  border-radius: none;
+}
+.navbar-nav.navbar-right > li > .dropdown-menu:after {
+  /* display: none !important; */
+  right: auto !important;
+  left: 12px !important;
+}
+.navbar-nav.navbar-right > li > .dropdown-menu:before {
+  right: auto !important;
+  left: 12px !important;
+}
+.row-w-100 {
+  min-width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.row-w-300 {
+  min-width: 600px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.md-hidden {
+  display: block;
+}
+.col-sub-menu {
+  padding: 3rem;
+  color: #606060;
+  font-family: "Univers LT Std";
+  font-weight: bold;
+}
+.b-logo2 img {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  max-width: 80%;
+}
+.valores19 {
+  margin-top: 0%;
+  margin-bottom: 0%;
+  color: #606060;
+  font-family: "Univers LT Std";
+  font-weight: bold;
+  font-size: 15px;
+}
+.bb {
+  border: solid 1px #000;
+}
+@media (max-width: 992px) {
+  .off-canvas-sidebar .navbar-collapse {
+    top: 0px !important;
+    margin: 0 !important;
+    height: 100vh !important;
+    display: block !important;
+  }
+  .md-hidden {
+    display: none !important;
+  }
+}
+.container {
+  /* min-width: 100%; */
+}

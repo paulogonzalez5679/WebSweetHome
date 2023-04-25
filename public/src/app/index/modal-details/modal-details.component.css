@@ -1,0 +1,97 @@
+.modal-dialog {
+  width: 60% !important;
+}
+.img-card {
+  /* max-width: 50%; */
+  /* max-height: 70vh; */
+  max-width: 100%; 
+  max-height: 400px  !important;
+  /* min-height: 400px  !important; */
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  overflow: hidden;
+  margin: 0 auto !important;
+}
+.bb {
+  border: solid 1px #000;
+}
+.row-w-100 {
+  max-width: 100%;
+  margin: 0 auto;
+}
+.cart {
+  font-size: 30px;
+  color: #363636;
+}
+.btn-sm {
+  padding-right: 25px;
+}
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+.delete-wish {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: red;
+}
+.btn-circle {
+  background-color: white;
+  border-radius: 160px;
+  padding: 10px !important;
+}
+
+
+@media (max-width: 576px) {
+  .modal-dialog {
+    width: 90% !important;
+  }
+
+  .img-card {
+    max-width: 90%; 
+    max-height: 300px  !important;
+    margin-bottom: 3px;
+ 
+  }
+}
+
+@media (max-width: 769px) {
+  .modal-dialog {
+    width: 95% !important;
+  }
+
+  .img-card {
+    max-width: 90%; 
+    max-height: 300px  !important;
+    margin-bottom: 3px;
+ 
+  }
+}
+
+@media (max-width: 869px) {
+  .modal-dialog {
+    width: 95% !important;
+  }
+
+  .img-card {
+    max-width: 90%; 
+    max-height: 300px  !important;
+    margin-bottom: 3px;
+ 
+  }
+}
+
+@media (max-width: 992px) {
+  .modal-dialog {
+    width: 95% !important;
+  }
+
+  .img-card {
+    max-width: 90%; 
+    max-height: 300px  !important;
+    margin-bottom: 3px;
+ 
+  }
+}
